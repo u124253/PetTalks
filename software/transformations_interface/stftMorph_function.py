@@ -24,9 +24,9 @@ def main(inputFile1='../../sounds/ocean.wav', inputFile2='../../sounds/speech-ma
 	balancef: balance factor between booth sounds, 0 is sound 1 and 1 is sound 2
 	"""
 
-	# read input sounds
+	# read input sounds                
 	(fs, x1) = UF.wavread(inputFile1)
-	(fs, x2) = UF.wavread(inputFile2)
+	(fs, x2) = UF.wavread(inputFile2)    #totalmente
 
 	# compute analysis windows
 	w1 = get_window(window1, M1)
