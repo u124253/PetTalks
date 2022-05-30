@@ -81,7 +81,7 @@ class Aplicacion:
 
         # notebook para hacer la seleccion de distintos personages
         self.notebook1 = ttk.Notebook(root)
-        ttk.Style().configure("TNotebook", background="black")
+        ttk.Style().configure("TNotebook", background="white")
         self.notebook1.place(x=wWeight * 0.5, y=wHeight * 0.3)
         #esto se tiene que hacer para cada personaje
         self.frame1 = ttk.Frame(self.notebook1) #se genera un frame
@@ -109,7 +109,7 @@ class Aplicacion:
         #self.notebook1.tab(self.notebook1.select(), "text")
 
         # slider para cambiar el grado
-        self.scl = ttk.Scale(root, from_=0, to=100, length=400, orient="horizontal")
+        self.scl = ttk.Scale(root, from_=0, to=1, length=400, orient="horizontal")
         self.scl.place(x=wWeight*0.02, y=wHeight*0.8)
 
         self.finalButon = tkinter.Button(root, text="Listo", command=self.returnDeTodo).place(x=wWeight * 0.4, y=wHeight * 0.9)

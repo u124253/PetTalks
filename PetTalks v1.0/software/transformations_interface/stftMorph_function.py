@@ -10,7 +10,7 @@ import stft as STFT
 import utilFunctions as UF
 import stftTransformations as STFTT
 
-def main(inputFile1='../../sounds/ocean.wav', inputFile2='../../sounds/speech-male.wav', window1='hamming',  window2='hamming', 
+def main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../software/sounds/speech-male.wav', window1='hamming',  window2='hamming',
 	M1=1024, M2=1024, N1=1024, N2=1024, H1=256, smoothf = .5, balancef = 0.5):
 	"""
 	Function to perform a morph between two sounds
