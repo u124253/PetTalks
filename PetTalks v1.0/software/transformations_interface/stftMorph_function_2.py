@@ -93,4 +93,4 @@ def main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../softwar
 	plt.show()
 
 if __name__ == '__main__':
-	main()
+	main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../software/sounds/speech-male.wav', smoothf = .5, balancef = 0.5)
