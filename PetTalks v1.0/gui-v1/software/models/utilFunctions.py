@@ -2,6 +2,14 @@ import numpy as np
 import copy, sys, os
 from scipy.io.wavfile import write, read
 
+winsound_imported = False
+if sys.platform == "win32":
+	try:
+		import winsound
+		winsound_imported = True
+	except:
+		print ("You won't be able to play sounds, winsound could not be imported")
+
 def isPower2(num):
 	"""
 	Check if num is power of two

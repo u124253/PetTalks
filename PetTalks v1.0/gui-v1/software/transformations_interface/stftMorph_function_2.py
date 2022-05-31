@@ -2,15 +2,16 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+path = 'C:/Users/tomas/Downloads/PetTalks/PetTalks v1.0/gui-v1/'
 from scipy.signal import get_window
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
-import stft as STFT
+
 import utilFunctions as UF
 import stftTransformations as STFTT
 
-def main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../software/sounds/speech-male.wav', window1='hamming',  window2='hamming',
+def main(inputFile1= path + 'software/sounds/dog.wav', inputFile2= path + 'software/sounds/speech-male.wav', window1='hamming',  window2='hamming',
 	M1=1024, M2=1024, N1=1024, N2=1024, H1=256, smoothf = .5, balancef = 0.5):
 	"""
 	Function to perform a morph between two sounds
@@ -36,9 +37,9 @@ def main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../softwar
 	y = STFTT.stftMorph(x1, x2, fs, w1, N1, w2, N2, H1, smoothf, balancef)
 
 	# write output sound
-	outputFile = 'output_sounds/' + os.path.basename(inputFile1)[:-4] + '_stftMorph.wav'
+	outputFile = path + 'software/transformations_interface/output_sounds/' + os.path.basename(inputFile2)
 	UF.wavwrite(y, fs, outputFile)
 
-
+	return y
 if __name__ == '__main__':
-	main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../software/sounds/speech-male.wav', smoothf = .5, balancef = 0.5)
+	main()

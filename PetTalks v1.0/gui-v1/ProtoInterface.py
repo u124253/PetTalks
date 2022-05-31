@@ -1,10 +1,19 @@
+
 import tkinter
 from tkinter import ttk
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
+import sys, os
+path = 'C:/Users/tomas/Downloads/PetTalks/PetTalks v1.0/gui-v1/'
+sys.path.insert(0, path + "software/transformations_interface/")
+sys.path.insert(0, path + "software/models/")
+
+import stftMorph_function_2 as morph
+import utilFunctions as UF
 
 def generaMatriz(capaMatrizGen):
     def which_button(button_pressed):
-        morph.main()
+        UF.wavplay(path + "software/transformations_interface/output_sounds/"+ button_pressed[-1]+'.wav')
+        print(button_pressed[-1])
+
         # return button_pressed
 
     pad_1 = tkinter.Button(capaMatrizGen, text="button1", width=16, height=8,
@@ -39,7 +48,6 @@ def generaMatriz(capaMatrizGen):
 class Aplicacion:
     def __init__(self, root):
         root.title("PetTalk")
-        
 
         # la ventana no es responsive aun
         # x en funcion del wWeight
@@ -108,9 +116,9 @@ class Aplicacion:
         #self.notebook1.tab(self.notebook1.select(), "text")
 
         # slider para cambiar el grado
-        self.scl = ttk.Scale(root, from_=0, to=100, length=400, orient="horizontal")
+        self.scl = ttk.Scale(root, from_=0, to=1, length=400, orient="horizontal")
         self.scl.place(x=wWeight*0.02, y=wHeight*0.8)
-
+        self.morph()
         self.finalButon = tkinter.Button(root, text="Listo", command=self.returnDeTodo,height=3, width=15).place(x=wWeight * 0.15, y=wHeight * 0.86)
 
 
@@ -118,6 +126,26 @@ class Aplicacion:
         self.returnLista()
         self.returnNotebook()
         self.returnSlider()
+        self.morph()
+
+    def morph(self):
+        ## BORRAMOS LOS AUDIOS DE LA CARPETA OUTPUT SOUND
+        audios = os.listdir(path + 'software/transformations_interface/output_sounds/')
+        for audio in audios:
+            os.remove(path + 'software/transformations_interface/output_sounds/' + audio)
+
+
+        audios = os.listdir(path + "software/sounds/")
+        animal = self.combo.get()
+
+        for audio in audios:
+            if audio != animal:
+                inputFile1 = animal.lower()+'.wav'
+                inputFile2 = audio
+                balance = self.scl.get()
+                morph.main(inputFile1= path + "software/sounds/"+ inputFile1, inputFile2=path + "software/sounds/"+inputFile2,
+                           balancef = balance)
+
 
     def returnLista(self):
         print(self.combo.get())
