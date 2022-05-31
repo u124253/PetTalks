@@ -35,62 +35,10 @@ def main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../softwar
 	# perform morphing
 	y = STFTT.stftMorph(x1, x2, fs, w1, N1, w2, N2, H1, smoothf, balancef)
 
-	# compute the magnitude and phase spectrogram of input sound (for plotting)
-	mX1, pX1 = STFT.stftAnal(x1, w1, N1, H1)
-	
-	# compute the magnitude and phase spectrogram of output sound (for plotting)
-	mY, pY = STFT.stftAnal(y, w1, N1, H1)
-	
 	# write output sound
 	outputFile = 'output_sounds/' + os.path.basename(inputFile1)[:-4] + '_stftMorph.wav'
 	UF.wavwrite(y, fs, outputFile)
 
-	# create figure to plot
-	plt.figure(figsize=(9, 6))
-
-	# frequency range to plot
-	maxplotfreq = 10000.0
-
-	# plot sound 1
-	plt.subplot(4,1,1)
-	plt.plot(np.arange(x1.size)/float(fs), x1)
-	plt.axis([0, x1.size/float(fs), min(x1), max(x1)])
-	plt.ylabel('amplitude')
-	plt.xlabel('time (sec)')
-	plt.title('input sound: x')
-
-	# plot magnitude spectrogram of sound 1
-	plt.subplot(4,1,2)
-	numFrames = int(mX1[:,0].size)
-	frmTime = H1*np.arange(numFrames)/float(fs)                             
-	binFreq = fs*np.arange(N1*maxplotfreq/fs)/N1  
-	plt.pcolormesh(frmTime, binFreq, np.transpose(mX1[:,:int(N1*maxplotfreq/fs)+1]))
-	plt.xlabel('time (sec)')
-	plt.ylabel('frequency (Hz)')
-	plt.title('magnitude spectrogram of x')
-	plt.autoscale(tight=True)
-
-	# plot magnitude spectrogram of morphed sound 
-	plt.subplot(4,1,3)
-	numFrames = int(mY[:,0].size)
-	frmTime = H1*np.arange(numFrames)/float(fs)                             
-	binFreq = fs*np.arange(N1*maxplotfreq/fs)/N1 
-	plt.pcolormesh(frmTime, binFreq, np.transpose(mY[:,:int(N1*maxplotfreq/fs)+1]))
-	plt.xlabel('time (sec)')
-	plt.ylabel('frequency (Hz)')
-	plt.title('magnitude spectrogram of y')
-	plt.autoscale(tight=True)
-
-	# plot the morphed sound
-	plt.subplot(4,1,4)
-	plt.plot(np.arange(y.size)/float(fs), y)
-	plt.axis([0, y.size/float(fs), min(y), max(y)])
-	plt.ylabel('amplitude')
-	plt.xlabel('time (sec)')
-	plt.title('output sound: y')
-
-	plt.tight_layout()
-	plt.show()
 
 if __name__ == '__main__':
 	main(inputFile1='../../software/sounds/ocean.wav', inputFile2='../../software/sounds/speech-male.wav', smoothf = .5, balancef = 0.5)

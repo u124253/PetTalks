@@ -1,10 +1,10 @@
 import tkinter
 from tkinter import ttk
-
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
 
 def generaMatriz(capaMatrizGen):
     def which_button(button_pressed):
-        print(button_pressed)
+        morph.main()
         # return button_pressed
 
     pad_1 = tkinter.Button(capaMatrizGen, text="button1", width=16, height=8,
