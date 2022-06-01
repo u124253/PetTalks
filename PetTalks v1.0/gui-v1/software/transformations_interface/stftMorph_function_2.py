@@ -37,7 +37,7 @@ def main(inputFile1= path + 'software/sounds/dog.wav', inputFile2= path + 'softw
 	y = STFTT.stftMorph(x1, x2, fs, w1, N1, w2, N2, H1, smoothf, balancef)
 
 	# write output sound
-	outputFile = path + 'software/transformations_interface/output_sounds/' + os.path.basename(inputFile2)
+	outputFile = path + 'software/transformations_interface/Temp/' + os.path.basename(inputFile2)
 	UF.wavwrite(y, fs, outputFile)
 
 	return y
