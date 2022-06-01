@@ -2,6 +2,10 @@
 import tkinter
 from tkinter import ttk
 import sys, os
+from pathlib import Path
+
+absolutepath = os.path.abspath(__file__)
+pathFINE = str(p.parent)
 path = 'C:/Users/tomas/Downloads/PetTalks/PetTalks v1.0/gui-v1/'
 sys.path.insert(0, path + "software/transformations_interface/")
 sys.path.insert(0, path + "software/models/")
