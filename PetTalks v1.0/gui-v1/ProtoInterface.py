@@ -1,14 +1,13 @@
-
 import tkinter
 from tkinter import ttk
 import sys, os
 from pathlib import Path
 
-absolutepath = os.path.abspath(__file__)
-pathFINE = str(p.parent)
-path = 'C:/Users/tomas/Downloads/PetTalks/PetTalks v1.0/gui-v1/'
-sys.path.insert(0, path + "software/transformations_interface/")
-sys.path.insert(0, path + "software/models/")
+
+path = str(Path(os.path.abspath(__file__)).parent)
+
+sys.path.insert(0, path + "/software/transformations_interface/")
+sys.path.insert(0, path + "/software/models/")
 
 import stftMorph_function_2 as morph
 import utilFunctions as UF
@@ -19,8 +18,8 @@ def generaMatriz(capaMatrizGen):
         selected_page = aplicacion.notebook1.select()
         num = aplicacion.notebook1.index(selected_page)
 
-        if os.path.exists(path + "software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav'):
-            UF.wavplay(path + "software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav')
+        if os.path.exists(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav'):
+            UF.wavplay(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav')
 
 
         # return button_pressed
@@ -85,15 +84,7 @@ class Aplicacion:
         self.combo = ttk.Combobox(state="readonly", values=["Dog", "Cat", "Donkey"])
         self.combo.place(x=wWeight*0.1, y=wHeight*0.4)
         self.combo.set("Dog") #valor por defecto
-        #este boton se tiene que usar para poder recoger lo que seleccionas en el combobox, podriamos poner un boton
-        #solo para el combo o valdria con uno al finald el todo que nos haga lo mismo y sea para toda la aplicacion
-        #self.comboBoton = tkinter.Button(root, text="Listo1", command=self.returnLista).place(x=wWeight*0.30, y=wHeight*0.4)
-        #self.returnLista()
 
-        # matriz de botones de audio para el diaologo que se escoge
-        #self.capaMatriz = tkinter.Frame(root, bg="black")
-        #self.capaMatriz.place(x=wWeight * 0.5, y=wHeight * 0.3)
-        #generaMatriz(self.capaMatriz)
 
         # notebook para hacer la seleccion de distintos personages
         self.notebook1 = ttk.Notebook(root)
@@ -120,12 +111,9 @@ class Aplicacion:
         self.label4 = ttk.Label(self.frame4, text="¡Yo soy Po!")  # texto, es opcional
         generaMatriz(self.frame4)  # esta es su respectiva matriz
 
-        #pasa lo mismo que con el combobox
-        #self.notebookBoton = tkinter.Button(root, text="Listo2", command=self.returnNotebook).place(x=wWeight * 0.4, y=wHeight * 0.3)
-        #self.notebook1.tab(self.notebook1.select(), "text")
 
         # slider para cambiar el grado
-        self.scl = ttk.Scale(root, from_=0, to=1, length=400, orient="horizontal")
+        self.scl = ttk.Scale(root, from_=0, to=1, length=400, orient="horizontal", value = 0.5)
         self.scl.place(x=wWeight*0.02, y=wHeight*0.8)
         self.morph()
         self.finalButon = tkinter.Button(root, text="Listo", command=self.returnDeTodo,height=3, width=15).place(x=wWeight * 0.15, y=wHeight * 0.86)
@@ -139,21 +127,24 @@ class Aplicacion:
 
     def morph(self):
         ## BORRAMOS LOS AUDIOS DE LA CARPETA OUTPUT SOUND
-        audios = os.listdir(path + 'software/transformations_interface/output_sounds/')
+        audios = os.listdir(path + '/software/transformations_interface/Temp/')
         for audio in audios:
-            os.remove(path + 'software/transformations_interface/output_sounds/' + audio)
+            os.remove(path + '/software/transformations_interface/Temp/' + audio)
 
 
-        audios = os.listdir(path + "software/sounds/")
+        audios = os.listdir(path + "/software/sounds/")
         animal = self.combo.get()
 
         for audio in audios:
-            if audio != animal:
+            audio_name = audio.split('.')[0]
+            name = audio_name.split('_')[0]
+
+            if name != animal:
                 inputFile1 = animal.lower()+'.wav'
                 inputFile2 = audio
                 balance = self.scl.get()
-                morph.main(inputFile1= path + "software/sounds/"+ inputFile1, inputFile2=path + "software/sounds/"+inputFile2,
-                           balancef = balance)
+                morph.main(inputFile1=path + "/software/sounds/" + inputFile1, inputFile2=path + "/software/sounds/"+ inputFile2,
+                           balancef=balance)
 
 
     def returnLista(self):
