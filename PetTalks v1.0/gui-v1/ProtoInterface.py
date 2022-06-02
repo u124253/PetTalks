@@ -14,7 +14,7 @@ import utilFunctions as UF
 
 def generaMatriz(capaMatrizGen):
     def which_button(button_pressed):
-        pages = {0:'Amanda', 1:'Diego', 2: 'Thomas', 3: 'Rodrigo'}
+        pages = {0:'Amanda', 1:'Diego', 2: 'Thomas', 3: 'Rodrigo_grabaciones'}
         selected_page = aplicacion.notebook1.select()
         num = aplicacion.notebook1.index(selected_page)
 
@@ -72,16 +72,9 @@ class Aplicacion:
         self.canvas1.pack(fill="both", expand=True)
         self.canvas1.create_image(0, 0, image=self.imagenFondo, anchor="nw")
 
-        # logo
-        '''
-        self.logo = tkinter.PhotoImage(file="petalks.png")
-        self.label00 = tkinter.Label(root, image=self.logo, width=234, height=83)
-        self.label00.configure(bg="white")
-        self.label00.pack(fill="both", expand=True)
-        self.label00.place(x=10, y=10)
-        '''
+
         # lista desplegable para seleccionar el audio input1
-        self.combo = ttk.Combobox(state="readonly", values=["Dog", "Cat", "Donkey","jaguar"])
+        self.combo = ttk.Combobox(state="readonly", values=["pig2", "cat", "pig1","jaguar"])
         self.combo.place(x=wWeight*0.1, y=wHeight*0.4)
         self.combo.set("jaguar") #valor por defecto
 
@@ -140,10 +133,12 @@ class Aplicacion:
         for audio in audios:
             audio_name = audio.split('.')[0]
             name = audio_name.split('_')[0]
+            print("11111111111")
+            print(name)
 
-            if name != animal:
+            if name == animal:
                 inputFile1 = animal.lower()+'.wav'
-                inputFile2 = audio
+                inputFile2 = "hi.wav"
                 balance = self.scl.get()
                 morph.main(inputFile1=path + "/software/sounds/" + inputFile1, inputFile2=path + "/software/sounds/"+ inputFile2,
                            balancef=balance)
