@@ -14,7 +14,7 @@ import utilFunctions as UF
 
 def generaMatriz(capaMatrizGen):
     def which_button(button_pressed):
-        pages = {0:'_TinkyWinky', 1:'_Dipsy', 2: '_LaaLaa', 3: '_Po'}
+        pages = {0:'Amanda', 1:'Diego', 2: 'Thomas', 3: 'Rodrigo'}
         selected_page = aplicacion.notebook1.select()
         num = aplicacion.notebook1.index(selected_page)
 
@@ -24,23 +24,23 @@ def generaMatriz(capaMatrizGen):
 
         # return button_pressed
 
-    pad_1 = tkinter.Button(capaMatrizGen, text="button1", width=16, height=8,
-                           command=lambda m="button1": which_button(m))
-    pad_2 = tkinter.Button(capaMatrizGen, text="button2", width=16, height=8,
+    pad_1 = tkinter.Button(capaMatrizGen, text="Frase 1 ", width=16, height=8,
+                           command=lambda m="button1 ": which_button(m))
+    pad_2 = tkinter.Button(capaMatrizGen, text="Frase 2", width=16, height=8,
                            command=lambda m="button2": which_button(m))
-    pad_3 = tkinter.Button(capaMatrizGen, text="button3", width=16, height=8,
+    pad_3 = tkinter.Button(capaMatrizGen, text="Frase 3", width=16, height=8,
                            command=lambda m="button3": which_button(m))
-    pad_4 = tkinter.Button(capaMatrizGen, text="button4", width=16, height=8,
+    pad_4 = tkinter.Button(capaMatrizGen, text=":Frase 4", width=16, height=8,
                            command=lambda m="button4": which_button(m))
-    pad_5 = tkinter.Button(capaMatrizGen, text="button5", width=16, height=8,
+    pad_5 = tkinter.Button(capaMatrizGen, text="Frase 5", width=16, height=8,
                            command=lambda m="button5": which_button(m))
-    pad_6 = tkinter.Button(capaMatrizGen, text="button6", width=16, height=8,
+    pad_6 = tkinter.Button(capaMatrizGen, text="Frase 6 ", width=16, height=8,
                            command=lambda m="button6": which_button(m))
-    pad_7 = tkinter.Button(capaMatrizGen, text="button7", width=16, height=8,
+    pad_7 = tkinter.Button(capaMatrizGen, text="Frase 7", width=16, height=8,
                            command=lambda m="button7": which_button(m))
-    pad_8 = tkinter.Button(capaMatrizGen, text="button8", width=16, height=8,
+    pad_8 = tkinter.Button(capaMatrizGen, text="Frase 8", width=16, height=8,
                            command=lambda m="button8": which_button(m))
-    pad_9 = tkinter.Button(capaMatrizGen, text="button9", width=16, height=8,
+    pad_9 = tkinter.Button(capaMatrizGen, text="Frase 9", width=16, height=8,
                            command=lambda m="button9": which_button(m))
 
     pad_1.grid(row=0, column=0, padx=1, pady=1)
@@ -61,11 +61,11 @@ class Aplicacion:
         # x en funcion del wWeight
         wHeight = 720  #adecuado al tamaño de la foto tanto HxW
         wWeight = 1045
-        root.configure(width = wWeight, height = wHeight, bg="black")
+        root.configure(width = wWeight, height = wHeight, bg="white")
         root.resizable(False,False) #para que el usuario no pueda redimensionar la ventana ya predifinida
 
         # fondo
-        self.imagenFondo = tkinter.PhotoImage(file="bg_v3.png")
+        self.imagenFondo = tkinter.PhotoImage(file="gui_desing_7.png")
         self.label0 = tkinter.Label(root, image=self.imagenFondo)
         #self.label0.place(relwidth=1,relheight=1)
         self.canvas1 = tkinter.Canvas(root, width=wWeight, height=wHeight)
@@ -81,40 +81,42 @@ class Aplicacion:
         self.label00.place(x=10, y=10)
         '''
         # lista desplegable para seleccionar el audio input1
-        self.combo = ttk.Combobox(state="readonly", values=["Dog", "Cat", "Donkey"])
+        self.combo = ttk.Combobox(state="readonly", values=["Dog", "Cat", "Donkey","jaguar"])
         self.combo.place(x=wWeight*0.1, y=wHeight*0.4)
-        self.combo.set("Dog") #valor por defecto
+        self.combo.set("jaguar") #valor por defecto
 
 
         # notebook para hacer la seleccion de distintos personages
         self.notebook1 = ttk.Notebook(root)
-        ttk.Style().configure("TNotebook", background="black")
+        ttk.Style().configure("TNotebook", background="white")
         self.notebook1.place(x=wWeight * 0.5, y=wHeight * 0.3)
         #esto se tiene que hacer para cada personaje
         self.frame1 = ttk.Frame(self.notebook1) #se genera un frame
-        self.notebook1.add(self.frame1, text="TinkyWinky") #se le agrega su respectiva pestaña dentro del notebook
-        self.label1 = ttk.Label(self.frame1, text="¡Yo soy TinkyWinky!") #texto, es opcional
+        self.notebook1.add(self.frame1, text="Amanda") #se le agrega su respectiva pestaña dentro del notebook
+        self.label1 = ttk.Label(self.frame1, text="¡Yo soy Amanda!") #texto, es opcional
         generaMatriz(self.frame1) #esta es su respectiva matriz
 
+
         self.frame2 = ttk.Frame(self.notebook1)  # se genera un frame
-        self.notebook1.add(self.frame2, text="Dipsy")  # se le agrega su respectiva pestaña dentro del notebook
-        self.label2 = ttk.Label(self.frame1, text="¡Yo soy Dipsy!")  # texto, es opcional
+        self.notebook1.add(self.frame2, text="Diego")  # se le agrega su respectiva pestaña dentro del notebook
+        self.label2 = ttk.Label(self.frame1, text="¡Yo soy Diego!")  # texto, es opcional
         generaMatriz(self.frame2)  # esta es su respectiva matriz
 
         self.frame3 = ttk.Frame(self.notebook1)  # se genera un frame
-        self.notebook1.add(self.frame3, text="LaaLaa")  # se le agrega su respectiva pestaña dentro del notebook
-        self.label3 = ttk.Label(self.frame3, text="¡Yo soy LaaLaa!")  # texto, es opcional
+        self.notebook1.add(self.frame3, text="Thomas")  # se le agrega su respectiva pestaña dentro del notebook
+        self.label3 = ttk.Label(self.frame3, text="¡Yo soy Thomas!")  # texto, es opcional
         generaMatriz(self.frame3)  # esta es su respectiva matriz
 
         self.frame4 = ttk.Frame(self.notebook1)  # se genera un frame
-        self.notebook1.add(self.frame4, text="Po")  # se le agrega su respectiva pestaña dentro del notebook
-        self.label4 = ttk.Label(self.frame4, text="¡Yo soy Po!")  # texto, es opcional
+        self.notebook1.add(self.frame4, text="Rodrigo")  # se le agrega su respectiva pestaña dentro del notebook
+        self.label4 = ttk.Label(self.frame4, text="¡Yo soy Rodrigo!")  # texto, es opcional
         generaMatriz(self.frame4)  # esta es su respectiva matriz
 
 
         # slider para cambiar el grado
-        self.scl = ttk.Scale(root, from_=0, to=1, length=400, orient="horizontal", value = 0.5)
-        self.scl.place(x=wWeight*0.02, y=wHeight*0.8)
+        self.scl = ttk.Scale(root, from_=0, to=1, length=279, orient="horizontal", value = 0.5)
+        #self.scl.place(x=wWeight*0.078, y=wHeight*0.763)
+        self.scl.place(x=80, y=wHeight*0.81)
         self.morph()
         self.finalButon = tkinter.Button(root, text="Listo", command=self.returnDeTodo,height=3, width=15).place(x=wWeight * 0.15, y=wHeight * 0.86)
 
