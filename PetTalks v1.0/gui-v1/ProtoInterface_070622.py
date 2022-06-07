@@ -54,6 +54,23 @@ def generaMatriz(capaMatrizGen):
     pad_8.grid(row=2, column=1, padx=1, pady=1)
     pad_9.grid(row=2, column=2, padx=1, pady=1)
 
+def morph(animal, balance):
+    ## BORRAMOS LOS AUDIOS DE LA CARPETA OUTPUT SOUND
+    audios = os.listdir(path + '/software/transformations_interface/Temp/')
+    for audio in audios:
+        os.remove(path + '/software/transformations_interface/Temp/' + audio)
+
+    audios = os.listdir(path + "/software/sounds/")
+
+    for audio in audios:
+        audio_name = audio.split('.')[0]
+        name = audio_name.split('_')[0]
+        if name == animal:
+            inputFile1 = animal.lower()+'.wav'
+            inputFile2 = "hi.wav"
+            morph.main(inputFile1=path + "/software/sounds/" + inputFile1, inputFile2=path + "/software/sounds/"+ inputFile2,
+                balancef=balance)
+
 class Aplicacion:
     def __init__(self, root):
         root.title("PetTalk")
@@ -111,7 +128,6 @@ class Aplicacion:
         self.scl = ttk.Scale(root, from_=0, to=1, length=279, orient="horizontal", value = 0.5)
         #self.scl.place(x=wWeight*0.078, y=wHeight*0.763)
         self.scl.place(x=80, y=wHeight*0.81)
-        self.morph()
 
         #######################################
         self.animal="perro"
@@ -119,9 +135,8 @@ class Aplicacion:
         self.balance="0.5"
         #######################################
 
-
         self.finalButon = tkinter.Button(root, text="Listo", command=self.returnDeTodo,height=3, width=15).place(x=wWeight * 0.15, y=wHeight * 0.86)
-        self.morph()
+        morph(self.animal, self.balance)
 
     def returnDeTodo(self):
         self.returnLista()
@@ -150,33 +165,6 @@ class Aplicacion:
 
         print("balance:",self.scl.get())
         #balance=self.scl.get()
-
-
-
-    def morph(self):
-        ## BORRAMOS LOS AUDIOS DE LA CARPETA OUTPUT SOUND
-        audios = os.listdir(path + '/software/transformations_interface/Temp/')
-        for audio in audios:
-            os.remove(path + '/software/transformations_interface/Temp/' + audio)
-
-
-        audios = os.listdir(path + "/software/sounds/")
-        k = self.animal
-
-
-        for audio in audios:
-            audio_name = audio.split('.')[0]
-            name = audio_name.split('_')[0]
-            if name == animal:
-                #inputFile1 = self.animal.lower()+'.wav'
-                inputFile1 = 'jaguar.wav'
-                """
-                ***************************************************************************************************
-                """
-                inputFile2 = "hi.wav"
-                balance = 0.5
-                morph.main(inputFile1=path + "/software/sounds/" + inputFile1, inputFile2=path + "/software/sounds/"+ inputFile2,
-                           balancef=balance)
 
 root = tkinter.Tk()
 aplicacion = Aplicacion(root)
