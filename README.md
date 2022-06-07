@@ -22,9 +22,9 @@ Instrucciones de uso
   ipython, numpy, matplotlib, scipy, y cython
   Usar terminal o API para ello
   
-  3.1. En Ubuntu: <code>$ sudo apt-get install python-dev ipython python-numpy python-matplotlib python-scipy cython</code>
+    3.1. En Ubuntu: <code>$ sudo apt-get install python-dev ipython python-numpy python-matplotlib python-scipy cython</code>
   
-  3.2. En OSX: <code>$ pip install ipython numpy matplotlib scipy cython</code>
+    3.2. En OSX: <code>$ pip install ipython numpy matplotlib scipy cython</code>
 
 Requisitos mínimos
 ----------
