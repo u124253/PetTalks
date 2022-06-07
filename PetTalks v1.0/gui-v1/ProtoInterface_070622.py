@@ -54,7 +54,7 @@ def generaMatriz(capaMatrizGen):
     pad_8.grid(row=2, column=1, padx=1, pady=1)
     pad_9.grid(row=2, column=2, padx=1, pady=1)
 
-def morph(animal, balance):
+def makeMorph(animal, balance):
     ## BORRAMOS LOS AUDIOS DE LA CARPETA OUTPUT SOUND
     audios = os.listdir(path + '/software/transformations_interface/Temp/')
     for audio in audios:
@@ -65,6 +65,7 @@ def morph(animal, balance):
     for audio in audios:
         audio_name = audio.split('.')[0]
         name = audio_name.split('_')[0]
+        
         if name == animal:
             inputFile1 = animal.lower()+'.wav'
             inputFile2 = "hi.wav"
@@ -136,7 +137,6 @@ class Aplicacion:
         #######################################
 
         self.finalButon = tkinter.Button(root, text="Listo", command=self.returnDeTodo,height=3, width=15).place(x=wWeight * 0.15, y=wHeight * 0.86)
-        morph(self.animal, self.balance)
 
     def returnDeTodo(self):
         self.returnLista()
@@ -144,8 +144,7 @@ class Aplicacion:
         self.returnNotebook()
         self.returnSlider()
         #self.morph()
-
-
+        makeMorph(self.animal, self.balance)
 
     def returnLista(self):
         self.animal=self.combo.get();
