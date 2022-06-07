@@ -13,7 +13,7 @@ import stftTransformations as STFTT
 
 def main(inputFile1, inputFile2, window1='hamming',  window2='hamming',
 	M1=1024, M2=1024, N1=1024, N2=1024, H1=256, smoothf = .5, balancef = 0.5):
-	print('xxxxxxxxxxxxxxxxxx')
+	print('---------------------entro a morph:')
 	print(inputFile1)
 	print(inputFile2)
 	"""
@@ -42,7 +42,8 @@ def main(inputFile1, inputFile2, window1='hamming',  window2='hamming',
 	# write output sound
 	outputFile = path + '/Temp/' + os.path.basename("moprh_result.wav")
 	UF.wavwrite(y, fs, outputFile)
-
+	#Play file
+	UF.wavplay(path + '/Temp/' + os.path.basename("moprh_result.wav"))
 	return y
 if __name__ == '__main__':
 	main()

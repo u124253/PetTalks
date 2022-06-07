@@ -1,5 +1,5 @@
 import sys, os
-path = 'C:/Users/tomas/Downloads/PetTalks/PetTalks v1.0/gui-v1/'
+path = 'C:/Users/tomas/Downloads/PetTalks/PetTalks gui-v0.0/gui-gui-v0/'
 
 audios = os.listdir(path + "software/sounds/")
 

@@ -138,7 +138,7 @@ class Aplicacion:
 
             if name == animal:
                 inputFile1 = animal.lower()+'.wav'
-                inputFile2 = "hi.wav"
+                inputFile2 = "hi_fast.wav"
                 balance = self.scl.get()
                 morph.main(inputFile1=path + "/software/sounds/" + inputFile1, inputFile2=path + "/software/sounds/"+ inputFile2,
                            balancef=balance)
