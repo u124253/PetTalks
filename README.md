@@ -33,7 +33,7 @@ CPU intel i3 o AMD Ryzen 3
 Almacenamiento mínimo: 1 Gb
 
 
-### content
+### Content
 all the code is available in the software directory
 
 ### License
