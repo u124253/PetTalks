@@ -26,28 +26,32 @@ def generaMatriz(capaMatrizGen):
         #print("xxxxxxxxxxyyyyyyyyyuuuuuuuuuuuu",path + "/software/transformations_interface/Temp/" + button_pressed[-1] +'.wav')
         #UF.wavplay(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav')
 
-        global frase
+        global frase #para editar los botones y coger
         frase = button_pressed
         print("button pressed in genera matriz",button_pressed, frase)
 
     pad_1 = tkinter.Button(capaMatrizGen, text="Greeting ", width=16, height=8,
                            command=lambda m='hi': which_button(m))
-    pad_2 = tkinter.Button(capaMatrizGen, text="Frase 2", width=16, height=8,
-                           command=lambda m="button2": which_button(m))
-    pad_3 = tkinter.Button(capaMatrizGen, text="Frase 3", width=16, height=8,
-                           command=lambda m="button3": which_button(m))
-    pad_4 = tkinter.Button(capaMatrizGen, text="Frase 4", width=16, height=8,
-                           command=lambda m="button4": which_button(m))
-    pad_5 = tkinter.Button(capaMatrizGen, text="Frase 5", width=16, height=8,
-                           command=lambda m="button5": which_button(m))
-    pad_6 = tkinter.Button(capaMatrizGen, text="Frase 6 ", width=16, height=8,
-                           command=lambda m="button6": which_button(m))
-    pad_7 = tkinter.Button(capaMatrizGen, text="Frase 7", width=16, height=8,
-                           command=lambda m="button7": which_button(m))
-    pad_8 = tkinter.Button(capaMatrizGen, text="Frase 8", width=16, height=8,
-                           command=lambda m="button8": which_button(m))
-    pad_9 = tkinter.Button(capaMatrizGen, text="Frase 9", width=16, height=8,
-                           command=lambda m="button9": which_button(m))
+    pad_2 = tkinter.Button(capaMatrizGen, text="Day", width=16, height=8,
+                           command=lambda m="day": which_button(m))
+    pad_3 = tkinter.Button(capaMatrizGen, text="Afternoon", width=16, height=8,
+                           command=lambda m="afternoon": which_button(m))
+    pad_4 = tkinter.Button(capaMatrizGen, text="Night", width=16, height=8,
+                           command=lambda m="night": which_button(m))
+    pad_5 = tkinter.Button(capaMatrizGen, text="Merry Christmas", width=16, height=8,
+                           command=lambda m="merry": which_button(m))
+    pad_6 = tkinter.Button(capaMatrizGen, text="Star Wars", width=16, height=8,
+                           command=lambda m="star": which_button(m))
+    pad_7 = tkinter.Button(capaMatrizGen, text="ToyStory", width=16, height=8,
+                           command=lambda m="toy": which_button(m))
+    pad_8 = tkinter.Button(capaMatrizGen, text="AuronPlay", width=16, height=8,
+                           command=lambda m="auron": which_button(m))
+    pad_9 = tkinter.Button(capaMatrizGen, text="Sexto Sentido", width=16, height=8,
+                           command=lambda m="sexto": which_button(m))
+
+    #para que cada uno grabe sus audios con las frases que estan guardadas en meeting
+    #ejemplo Diegohi.wav guardar en sound sustituye diego por tu nombre
+    #y así con todos los audios
 
     pad_1.grid(row=0, column=0, padx=1, pady=1)
     pad_2.grid(row=0, column=1, padx=1, pady=1)
