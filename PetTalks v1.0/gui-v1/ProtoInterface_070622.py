@@ -12,46 +12,42 @@ sys.path.insert(0, path + "/software/models/")
 import stftMorph_function_2 as morph
 import utilFunctions as UF
 
-frase = 'null' #para coger cada palabra de nuestro boton y enlazar
+frase = 'null'
 
 def generaMatriz(capaMatrizGen):
     def which_button(button_pressed):
         pages = {0:'Amanda', 1:'Diego', 2: 'Thomas', 3: 'Rodrigo'}
         selected_page = aplicacion.notebook1.select()
         num = aplicacion.notebook1.index(selected_page)
-        #aqui cambiar el path para que se reproduzca el sonido que se desee y no solo el hi_fast.wav
-        if os.path.exists(path + "/software/sounds/" + "hi.wav"):
-            UF.wavplay(path + "/software/sounds/" + "hi.wav")
+#############################aqui cambiar el path para que se reproduzca el sonido que se desee y no solo el hi_fast.wav
+        if os.path.exists(path + "/software/sounds/" + "Diegohi.wav"):
+            UF.wavplay(path + "/software/sounds/" + "Diegohi.wav")
         #print("-----------------------------",button_pressed)
         #print("xxxxxxxxxxyyyyyyyyyuuuuuuuuuuuu",path + "/software/transformations_interface/Temp/" + button_pressed[-1] +'.wav')
         #UF.wavplay(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav')
 
-        global frase #para editar los botones y coger
+        global frase
         frase = button_pressed
         print("button pressed in genera matriz",button_pressed, frase)
 
-    pad_1 = tkinter.Button(capaMatrizGen, text="Greeting ", width=16, height=8,
+    pad_1 = tkinter.Button(capaMatrizGen, text="greetings ", width=16, height=8,
                            command=lambda m='hi': which_button(m))
-    pad_2 = tkinter.Button(capaMatrizGen, text="Day", width=16, height=8,
-                           command=lambda m="day": which_button(m))
-    pad_3 = tkinter.Button(capaMatrizGen, text="Afternoon", width=16, height=8,
-                           command=lambda m="afternoon": which_button(m))
-    pad_4 = tkinter.Button(capaMatrizGen, text="Night", width=16, height=8,
-                           command=lambda m="night": which_button(m))
-    pad_5 = tkinter.Button(capaMatrizGen, text="Merry Christmas", width=16, height=8,
-                           command=lambda m="merry": which_button(m))
-    pad_6 = tkinter.Button(capaMatrizGen, text="Star Wars", width=16, height=8,
-                           command=lambda m="star": which_button(m))
-    pad_7 = tkinter.Button(capaMatrizGen, text="ToyStory", width=16, height=8,
-                           command=lambda m="toy": which_button(m))
-    pad_8 = tkinter.Button(capaMatrizGen, text="AuronPlay", width=16, height=8,
-                           command=lambda m="auron": which_button(m))
-    pad_9 = tkinter.Button(capaMatrizGen, text="Sexto Sentido", width=16, height=8,
-                           command=lambda m="sexto": which_button(m))
-
-    #para que cada uno grabe sus audios con las frases que estan guardadas en meeting
-    #ejemplo Diegohi.wav guardar en sound sustituye diego por tu nombre
-    #y así con todos los audios
+    pad_2 = tkinter.Button(capaMatrizGen, text="Merry Christmas", width=16, height=8,
+                           command=lambda m="button2": which_button(m))
+    pad_3 = tkinter.Button(capaMatrizGen, text="Happy Birthday", width=16, height=8,
+                           command=lambda m="button3": which_button(m))
+    pad_4 = tkinter.Button(capaMatrizGen, text="Good Night", width=16, height=8,
+                           command=lambda m="button4": which_button(m))
+    pad_5 = tkinter.Button(capaMatrizGen, text="Frase 5", width=16, height=8,
+                           command=lambda m="button5": which_button(m))
+    pad_6 = tkinter.Button(capaMatrizGen, text="Frase 6 ", width=16, height=8,
+                           command=lambda m="button6": which_button(m))
+    pad_7 = tkinter.Button(capaMatrizGen, text="Frase 7", width=16, height=8,
+                           command=lambda m="button7": which_button(m))
+    pad_8 = tkinter.Button(capaMatrizGen, text="Frase 8", width=16, height=8,
+                           command=lambda m="button8": which_button(m))
+    pad_9 = tkinter.Button(capaMatrizGen, text="Frase 9", width=16, height=8,
+                           command=lambda m="button9": which_button(m))
 
     pad_1.grid(row=0, column=0, padx=1, pady=1)
     pad_2.grid(row=0, column=1, padx=1, pady=1)
