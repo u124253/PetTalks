@@ -36,7 +36,7 @@ def generaMatriz(capaMatrizGen):
                            command=lambda m="button2": which_button(m))
     pad_3 = tkinter.Button(capaMatrizGen, text="Frase 3", width=16, height=8,
                            command=lambda m="button3": which_button(m))
-    pad_4 = tkinter.Button(capaMatrizGen, text=":Frase 4", width=16, height=8,
+    pad_4 = tkinter.Button(capaMatrizGen, text="Frase 4", width=16, height=8,
                            command=lambda m="button4": which_button(m))
     pad_5 = tkinter.Button(capaMatrizGen, text="Frase 5", width=16, height=8,
                            command=lambda m="button5": which_button(m))
