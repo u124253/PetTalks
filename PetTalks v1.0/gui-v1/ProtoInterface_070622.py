@@ -30,7 +30,7 @@ def generaMatriz(capaMatrizGen):
         frase = button_pressed
         print("button pressed in genera matriz",button_pressed, frase)
 
-    pad_1 = tkinter.Button(capaMatrizGen, text="Frase 1 ", width=16, height=8,
+    pad_1 = tkinter.Button(capaMatrizGen, text="Greeting ", width=16, height=8,
                            command=lambda m='hi': which_button(m))
     pad_2 = tkinter.Button(capaMatrizGen, text="Frase 2", width=16, height=8,
                            command=lambda m="button2": which_button(m))
