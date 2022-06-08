@@ -12,7 +12,7 @@ sys.path.insert(0, path + "/software/models/")
 import stftMorph_function_2 as morph
 import utilFunctions as UF
 
-frase = 'null'
+frase = 'null' #para coger cada palabra de nuestro boton y enlazar
 
 def generaMatriz(capaMatrizGen):
     def which_button(button_pressed):
