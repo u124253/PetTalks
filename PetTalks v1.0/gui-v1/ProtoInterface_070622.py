@@ -20,8 +20,8 @@ def generaMatriz(capaMatrizGen):
         selected_page = aplicacion.notebook1.select()
         num = aplicacion.notebook1.index(selected_page)
 #############################aqui cambiar el path para que se reproduzca el sonido que se desee y no solo el hi_fast.wav
-        if os.path.exists(path + "/software/sounds/" + "Diegohi.wav"):
-            UF.wavplay(path + "/software/sounds/" + "Diegohi.wav")
+        if os.path.exists(path + "/software/sounds/" + "diegohi.wav"):
+            UF.wavplay(path + "/software/sounds/" + "diegohi.wav")
         #print("-----------------------------",button_pressed)
         #print("xxxxxxxxxxyyyyyyyyyuuuuuuuuuuuu",path + "/software/transformations_interface/Temp/" + button_pressed[-1] +'.wav')
         #UF.wavplay(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav')
@@ -50,7 +50,7 @@ def generaMatriz(capaMatrizGen):
                            command=lambda m="sexto": which_button(m))
 
     #para que cada uno grabe sus audios con las frases que estan guardadas en meeting
-    #ejemplo Diegohi.wav guardar en sound sustituye diego por tu nombre
+    #ejemplo diegohi.wav guardar en sound sustituye diego por tu nombre
     #y así con todos los audios
 
     pad_1.grid(row=0, column=0, padx=1, pady=1)

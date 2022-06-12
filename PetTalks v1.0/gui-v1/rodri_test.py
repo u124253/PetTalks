@@ -1,10 +1,75 @@
+import tkinter as tk
+from tkinter import ttk
+import sys
+import os
+from pathlib import Path
+
 import tkinter
 from tkinter import ttk
 import sys
 import os
 from pathlib import Path
 
-global frase
+path = str(Path(os.path.abspath(__file__)).parent)
+sys.path.insert(0, path + "/software/transformations_interface/")
+sys.path.insert(0, path + "/software/models/")
+import stftMorph_function_2 as morph
+import utilFunctions as UF
+
+
+frase="hi"
+personaje = "Rodrigo"
+
+
+def play_sound():
+    if os.path.exists(path + "/software/sounds/" + personaje + frase + ".wav"):
+        UF.wavplay(path + "/software/sounds/" + personaje + frase + ".wav")
+
+def saludar1():
+    personaje = "Diego"
+
+
+def saludar2():
+    frase = "hi"
+
+def saludar3():
+    play_sound()
+
+
+def main():
+
+
+
+    wHeight = 720  # adecuado al tamaño de la foto tanto HxW
+    wWeight = 1045
+
+
+
+
+    root = tk.Tk()
+
+    root.config(width=wWeight, height=wHeight, bg="white")
+    root.resizable(False, False)
+
+    boton1 = ttk.Button(text="¡1!", command=saludar1)
+    boton1.place(x=50, y=50)
+    boton2 = ttk.Button(text="¡2!", command=saludar2)
+    boton2.place(x=50, y=80)
+    boton3 = ttk.Button(text="¡3!", command=saludar3())
+    boton3.place(x=50, y=100)
+
+
+    root.mainloop()
+main()
+
+'''
+
+import tkinter
+from tkinter import ttk
+import sys
+import os
+from pathlib import Path
+
 
 path = str(Path(os.path.abspath(__file__)).parent)
 sys.path.insert(0, path + "/software/transformations_interface/")
@@ -28,7 +93,11 @@ def generaMatriz(capaMatrizGen):
         if os.path.exists(path + "/software/sounds/" + "diegohi.wav"):
             UF.wavplay(path + "/software/sounds/" + "diegohi.wav")
         print("iuuuuuuuu",personaje_g)
+        #print("-----------------------------",button_pressed)
+        #print("xxxxxxxxxxyyyyyyyyyuuuuuuuuuuuu",path + "/software/transformations_interface/Temp/" + button_pressed[-1] +'.wav')
+        #UF.wavplay(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav')
 
+        global frase
         frase = button_pressed
         print("--------------------------------------------------")
         print("button pressed ",button_pressed, frase)
@@ -188,3 +257,6 @@ class Aplicacion:
 root = tkinter.Tk()
 aplicacion = Aplicacion(root)
 root.mainloop()
+
+
+'''
