@@ -43,7 +43,7 @@ def main(inputFile1, inputFile2, window1='hamming',  window2='hamming',
 	outputFile = path + '/Temp/' + os.path.basename("moprh_result.wav")
 	UF.wavwrite(y, fs, outputFile)
 	#Play file
-	UF.wavplay(path + '/Temp/' + os.path.basename("moprh_result.wav"))
+	#UF.wavplay(path + '/Temp/' + os.path.basename("moprh_result.wav"))
 	return y
 if __name__ == '__main__':
 	main()

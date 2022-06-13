@@ -1,13 +1,9 @@
 import sys
 import os
-from tkinter import *
-import tkinter
 from logging import root
 from pathlib import Path
 from tkinter.ttk import Combobox
 from tkinter import *
-from IPython.terminal.pt_inputhooks import tk
-from PIL import Image, ImageTk
 
 path = str(Path(os.path.abspath(__file__)).parent)
 sys.path.insert(0, path + "/software/transformations_interface/")
@@ -18,9 +14,10 @@ import utilFunctions as UF
 
 
 class Window(Frame):
-    character = "None"
-    phrase = "None"
-    animal = "None"
+    character = "diego"
+    phrase = "hi"
+    animal = "jaguar"
+    balance = 0.5
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -29,41 +26,66 @@ class Window(Frame):
         self.pack(fill=BOTH, expand=1)
 
         selected_animal = StringVar()
+        ###########################################################################################################
+
+        # slider current value
+        current_value = DoubleVar()
+
+        def get_current_value():
+            self.balance=current_value.get()/100
+            print(self.balance)
+            return '{: .2f}'.format(current_value.get())
+
+        def slider_changed(event):
+            value_label.configure(text=get_current_value())
+
+        # label for the slider
+        slider_label = Label(
+            self,
+            text='Balance:'
+        )
+
+        slider_label.grid(
+            column=0,
+            row=0,
+            sticky='w'
+        )
+
+        #  slider
+        slider = Scale(self,from_=0,to=100,orient='horizontal',command=slider_changed,variable=current_value)
+
+        slider.grid(column=1,row=0,sticky='we')
+
+        # value label
+        value_label = Label(self,text=get_current_value())
+        value_label.grid(row=2,columnspan=2,sticky='n')
+
+        ############################################################################################################
 
         # ---------Buttons---------
         character_1 = Button(self, text="DIEGO",
                              height=5, width=10, command=lambda: self.set_character("diego"))
-
         character_2 = Button(self, text="RODRIGO",
                              height=5, width=10, command=lambda: self.set_character("rodrigo"))
-
         character_3 = Button(self, text="AMANDA",
                              height=5, width=10, command=lambda: self.set_character("amanda"))
-
         character_4 = Button(self, text="TOMAS",
                              height=5, width=10, command=lambda: self.set_character("tomas"))
 
         phrase_1 = Button(self, text="phrase_1",
                           height=5, width=10, command=lambda: self.set_phrase("hi"))
-
         phrase_2 = Button(self, text="phrase_2",
                           height=5, width=10, command=lambda: self.set_phrase("hi"))
-
         phrase_3 = Button(self, text="phrase_3",
                           height=5, width=10, command=lambda: self.set_phrase("hi3"))
-
         phrase_4 = Button(self, text="phrase_4",
                           height=5, width=10, command=lambda: self.set_phrase("hi4"))
-
         phrase_5 = Button(self, text="phrase_5",
                           height=5, width=10, command=lambda: self.set_phrase("hi5"))
-
         phrase_6 = Button(self, text="phrase_6",
                           height=5, width=10, command=lambda: self.set_phrase("hi6"))
-
         phrase_7 = Button(self, text="phrase_7",
                           height=5, width=10, command=lambda: self.set_phrase("hi7"))
-
         phrase_8 = Button(self, text="phrase_8",
                           height=5, width=10, command=lambda: self.set_phrase("hi8"))
 
@@ -86,26 +108,25 @@ class Window(Frame):
                           height=5, width=10, command=lambda: self.set_animal("jaguar"))
 
         playVoice = Button(self, text="PLAY VOICE", height=2, width=53, command=lambda: self.play_sound())
-
         playAnimal = Button(self, text="PLAY ANIMAL", height=2, width=53, command=lambda: self.play_animal_sound())
         stopAnimal = Button(self, text="STOP ANIMAL", height=2, width=53, command=lambda: self.stop_sound())
 
 
         exitButton = Button(self, text="Exit", command=self.clickExitButton)
-        # goButton = Button(self, text="Go!", command=self.go_and_moprh(), height=2, width=19)
 
+
+
+        goButton = Button(self, text="Go!", command=lambda: self.makeMorph(), height=2, width=19)
+
+        """
         # ---------Animals_List---------
         animals_list = Combobox(root, textvariable=selected_animal)
         animals_list['values'] = ["vaca", "obejas", "lleoo", "Gaviota", "cerdiño", "ballena", "pig2", "cat",
                                   "pig1", "jaguar"]
         # prevent typing a value
         animals_list['state'] = 'readonly'
-
+        """
         # ---------Buttons Positions---------
-
-        wHeight = 720
-        wWeight = 1045
-
         character_1.place(x=600, y=200)
         character_2.place(x=700, y=200)
         character_3.place(x=800, y=200)
@@ -134,27 +155,40 @@ class Window(Frame):
         playVoice.place(x=600, y=500)
         playAnimal.place(x=50, y=500)
         stopAnimal.place(x=50, y=600)
-        exitButton.place(x=600, y=600)
 
-        # goButton.place(x=wWeight * 0.05, y=wHeight * 0.86)
-
-        animals_list.place(x=700, y=700)
+        goButton.place(x=600, y=600)
+        exitButton.place(x=500, y=500)
+        #animals_list.place(x=700, y=700)
 
         # ---------Functions of the buttons---------
+
         def change_animal(event):
             self.animal = selected_animal.get()
             print(selected_animal.get())
 
-        animals_list.bind('<<ComboboxSelected>>', change_animal)
+        #animals_list.bind('<<ComboboxSelected>>', change_animal)
 
-    # clickExitButton: function that allow to exit the app
-    """
-    def go_and_moprh(self):
-        makeMorph(self.animal,0.5, self.personaje+sel)
-    """
+    def makeMorph(self):
+        # Delete old results
+        audios = os.listdir(path + '/software/transformations_interface/Temp/')
+        for audio in audios:
+            os.remove(path + '/software/transformations_interface/Temp/' + audio)
+
+        audios = os.listdir(path + "/software/sounds/")
+
+        for audio in audios:
+            audio_name = audio.split('.')[0]
+            name = audio_name.split('_')[0]
+
+            if name == self.animal:
+                inputFile1 = self.animal + '.wav'
+                inputFile2 = self.character + self.phrase + '.wav'
+                morph.main(path + "/software/sounds/" + inputFile1, path + "/software/sounds/" + inputFile2,
+                           balancef=self.balance)
 
     def clickExitButton(self):
         exit()
+
 
     # play_sound: Function that play a sound with the current information in character and phrase
     def play_sound(self):
@@ -168,11 +202,10 @@ class Window(Frame):
         if os.path.exists(path + "/software/sounds/" + self.animal + ".wav"):
             UF.wavplay(path + "/software/sounds/" + self.animal + ".wav")
 
-    # stop_sound: Function that stop audio playing a .wav file with silence
+    # stop_sound: Function that stop audio by playing a .wav file with silence
     def stop_sound(self):
         if os.path.exists(path + "/software/sounds/" + "stop.wav"):
             UF.wavplay(path + "/software/sounds/" + "stop.wav")
-
 
     # set_character: Function that allow to set the current value of a new_character
     def set_character(self, new_character):
@@ -188,9 +221,6 @@ class Window(Frame):
 
 root = Tk()
 app = Window(root)
-
-wHeight = 720
-wWeight = 1045
 
 root.wm_title("PetTalks")
 root.geometry("1045x720")
