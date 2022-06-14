@@ -10,21 +10,17 @@ especificamente, usaremos las funciones que permiten realizar morphs
 El proyecto contara con grabaciones predefinidas y voces de animales escogidas 
 de tal manera que el resultado que produzca PetTalks sea correcto. 
 
-Instrucciones de uso
+Para usarlo
 ----------
-
-1. Recomendado sistema operativo recomendado Windows 10, 11
-
-2. Ejecutar la aplicacion por terminal o con la ayuda de una API, recomendado
-  PyCharm en su version más reciente
-
-3. Instalar Python version 3.7.x y los siguientes modulos:
-  ipython, numpy, matplotlib, scipy, y cython
-  Usar terminal o API para ello
+Instalar Python version 3.7.x y los siguientes modulos: ipython, numpy, matplotlib, scipy, y cython
+  
+  Para instalarlos, usar terminal o API
   
     3.1. En Ubuntu: <code>$ sudo apt-get install python-dev ipython python-numpy python-matplotlib python-scipy cython</code>
   
     3.2. En OSX: <code>$ pip install ipython numpy matplotlib scipy cython</code>
+                Compilar las funciones de C siguientes: software/models/utilFunctions_C 
+                y después usar: $ python compileModule.py build_ext --inplace
 
 Requisitos mínimos
 ----------
