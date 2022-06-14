@@ -52,6 +52,7 @@ def slider_changed(event):
     print(balance)
 
 
+
 # slider current value
 current_value = DoubleVar()
 
@@ -66,6 +67,11 @@ slider.place(x=500, y=500)
 def clickExitButton():
     exit()
 
+# play_sound: Function that play a sound with the current information in character and phrase
+def play_interface_sound(audio_name):
+
+    if os.path.exists(path + "/software/sounds/"+audio_name+".wav"):
+        UF.wavplay(path + "/software/sounds/"+audio_name+".wav")
 
 # play_sound: Function that play a sound with the current information in character and phrase
 def play_sound():
@@ -99,7 +105,6 @@ def set_phrase(new_phrase):
     global phrase
     phrase = new_phrase
     print(phrase)
-
 
 # set_animal : Function that allow to set the self.animal a given animal in string format
 def set_animal(new_animal):
@@ -153,14 +158,21 @@ boton.place(x=50, y=200)
 Characters Buttons
 """
 
+img_char_1 = PhotoImage(file="character_1.png")
 character_1 = Button(root, text="DIEGO",
-                     height=5, width=10, command=lambda: set_character("diego"))
+                     height=80, width=80,image=img_char_1, command=lambda: set_character("diego"))
+
+img_char_2 = PhotoImage(file="character_2.png")
 character_2 = Button(root, text="RODRIGO",
-                     height=5, width=10, command=lambda: set_character("rodrigo"))
-character_3 = Button(root, text="AMANDA",
-                     height=5, width=10, command=lambda: set_character("amanda"))
-character_4 = Button(root, text="TOMAS",
-                     height=5, width=10, command=lambda: set_character("tomas"))
+                     height=80, width=80,image=img_char_2, command=lambda: set_character("rodrigo"))
+
+img_char_3 = PhotoImage(file="character_3.png")
+character_3 = Button(root, text="TOMAS",
+                     height=80, width=80,image=img_char_3, command=lambda: set_character("tomas"))
+
+img_char_4 = PhotoImage(file="character_4.png")
+character_4 = Button(root, text="AMANDA",
+                     height=80, width=80,image=img_char_4, command=lambda: set_character("amanda"))
 """
 Phrase Buttons
 """
@@ -227,7 +239,7 @@ stopAnimal = Button(root, text="STOP ", height=2, width=24, command=lambda: stop
 exitButton = Button(root, text="Exit",height=2,command=clickExitButton)
 goButton = Button(root, text="GO!", command=lambda: make_Morph(), height=2, width=24)
 
-saveButton = Button(root, text="SAVE TO:", command=lambda: save_to(), height=2, width=24)
+saveButton = Button(root, text="SAVE TO", command=lambda: save_to(), height=2, width=24)
 
 """
 Buttons Places
@@ -271,7 +283,7 @@ saveButton.place(x=800, y=600)
 exitButton.place(x=500, y=600)
 
 root.wm_title("PetTALKS")
-root.geometry("1015x720")
+root.geometry("1015x650")
 root.resizable(False, False)
 root.iconbitmap("PetTalks_icon.ico")
 
