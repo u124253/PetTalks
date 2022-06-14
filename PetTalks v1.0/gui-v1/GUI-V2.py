@@ -193,7 +193,7 @@ exitButton = Button(root, text="Exit", command=clickExitButton)
 goButton = Button(root, text="Go!", command=lambda: make_Morph(), height=2, width=19)
 
 saveButton = Button(root, text="Save To!", command=lambda: save_to(), height=2, width=19)
-saveButton.place(x=0, y=0)
+saveButton.place(x=876, y=666)
 
 
 
