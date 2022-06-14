@@ -19,8 +19,8 @@ Instalar Python version 3.7.x y los siguientes modulos: ipython, numpy, matplotl
     3.1. En Ubuntu: <code>$ sudo apt-get install python-dev ipython python-numpy python-matplotlib python-scipy cython</code>
   
     3.2. En OSX: <code>$ pip install ipython numpy matplotlib scipy cython</code>
-                Compilar las funciones de C siguientes: software/models/utilFunctions_C 
-                y después usar: $ python compileModule.py build_ext --inplace
+         Compilar las funciones de C siguientes: software/models/utilFunctions_C 
+         y después usar: $ python compileModule.py build_ext --inplace
 
 Requisitos mínimos
 ----------
