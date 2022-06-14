@@ -66,25 +66,7 @@ def wavplay(filename):
 		else:
 			print("Platform not recognized")
 
-def wav_stop():
-	"""
-	Play a wav audio file from system using OS calls
-	filename: name of file to read
-	"""
 
-
-	if sys.platform == "linux" or sys.platform == "linux2":
-		# linux
-		subprocess.call(["aplay", filename])
-
-	elif sys.platform == "darwin":
-		# OS X
-		subprocess.call(["afplay", filename])
-	elif sys.platform == "win32":
-		winsound.SND_PURGE
-
-	else:
-		print("Platform not recognized")
 
 
 def wavwrite(y, fs, filename):

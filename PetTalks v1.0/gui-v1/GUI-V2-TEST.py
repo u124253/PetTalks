@@ -1,9 +1,11 @@
 import sys
 import os
+import tkinter
 from logging import root
 from pathlib import Path
 from tkinter.ttk import Combobox
 from tkinter import *
+from tkinter.filedialog import askdirectory
 
 path = str(Path(os.path.abspath(__file__)).parent)
 sys.path.insert(0, path + "/software/transformations_interface/")
@@ -18,47 +20,58 @@ class Window(Frame):
     phrase = "hi"
     animal = "jaguar"
     balance = 0.5
+    save_to = "None"
 
     def __init__(self, master=None):
+
         Frame.__init__(self, master)
         self.master = master
         # widget can take all window
         self.pack(fill=BOTH, expand=1)
 
-        selected_animal = StringVar()
+        # selected_animal = StringVar()
         ###########################################################################################################
+        # --------------------------------------
+        """
+        
+        self.imagenFondo = tkinter.PhotoImage(file="gui_desing_7.png")
+        self.label0 = tkinter.Label(self, image=self.imagenFondo)
+        self.canvas1 = tkinter.Canvas(root, width=1045, height=720)
+        self.canvas1.pack(fill="both", expand=True)
+        self.canvas1.create_image(0, 0, image=self.imagenFondo, anchor="nw")
+        """
+        # --------------------------------------
 
         # slider current value
         current_value = DoubleVar()
 
         def get_current_value():
-            self.balance=current_value.get()/100
-            print(self.balance)
-            return '{: .2f}'.format(current_value.get())
+            self.balance = current_value.get() / 100
+            return
 
         def slider_changed(event):
             value_label.configure(text=get_current_value())
 
+        """
         # label for the slider
         slider_label = Label(
             self,
             text='Balance:'
         )
 
-        slider_label.grid(
-            column=0,
-            row=0,
-            sticky='w'
+        slider_label.grid(column=0,row=0,sticky='w'
         )
-
+        """
         #  slider
-        slider = Scale(self,from_=0,to=100,orient='horizontal',command=slider_changed,variable=current_value)
+        slider = Scale(self, from_=0, to=100, orient='horizontal', command=slider_changed, variable=current_value,
+                       length=145)
 
-        slider.grid(column=1,row=0,sticky='we')
+        slider.grid(column=1, row=0, sticky='we')
+        slider.place(x=440, y=503)
 
         # value label
-        value_label = Label(self,text=get_current_value())
-        value_label.grid(row=2,columnspan=2,sticky='n')
+        value_label = Label(self, text=get_current_value())
+        value_label.grid(row=2, columnspan=4, sticky='n')
 
         ############################################################################################################
 
@@ -111,13 +124,11 @@ class Window(Frame):
         playAnimal = Button(self, text="PLAY ANIMAL", height=2, width=53, command=lambda: self.play_animal_sound())
         stopAnimal = Button(self, text="STOP ANIMAL", height=2, width=53, command=lambda: self.stop_sound())
 
-
         exitButton = Button(self, text="Exit", command=self.clickExitButton)
+        goButton = Button(self, text="Go!", command=lambda: self.make_Morph(), height=2, width=19)
 
-
-
-        goButton = Button(self, text="Go!", command=lambda: self.makeMorph(), height=2, width=19)
-
+        saveButton = Button(self, text="Save To!", command=lambda: self.save_to(), height=2, width=19)
+        saveButton.place(x=0, y=0)
         """
         # ---------Animals_List---------
         animals_list = Combobox(root, textvariable=selected_animal)
@@ -157,20 +168,21 @@ class Window(Frame):
         stopAnimal.place(x=50, y=600)
 
         goButton.place(x=600, y=600)
-        exitButton.place(x=500, y=500)
-        #animals_list.place(x=700, y=700)
+        exitButton.place(x=500, y=600)
+        # animals_list.place(x=700, y=700)
 
         # ---------Functions of the buttons---------
-
+        """
         def change_animal(event):
             self.animal = selected_animal.get()
             print(selected_animal.get())
 
         #animals_list.bind('<<ComboboxSelected>>', change_animal)
+        """
 
-    def makeMorph(self):
+    def make_Morph(self):
         # Delete old results
-        audios = os.listdir(path + '/software/transformations_interface/Temp/')
+        audios = os.listdir(path + '/software/transformations_interface/temp/')
         for audio in audios:
             os.remove(path + '/software/transformations_interface/Temp/' + audio)
 
@@ -186,9 +198,19 @@ class Window(Frame):
                 morph.main(path + "/software/sounds/" + inputFile1, path + "/software/sounds/" + inputFile2,
                            balancef=self.balance)
 
+    def save_to(self):
+
+        import shutil
+
+        self.save_to = askdirectory(title='Select your folder')  # Shows dialog box and return the path
+        source_dir = path + '\\software\\transformations_interface\\temp\\moprh_result.wav'
+        print(source_dir)
+        print(self.save_to)
+        shutil.copytree(source_dir, self.save_to)
+
+    # clickExitButton: Exit the GUI
     def clickExitButton(self):
         exit()
-
 
     # play_sound: Function that play a sound with the current information in character and phrase
     def play_sound(self):
@@ -215,8 +237,10 @@ class Window(Frame):
     def set_phrase(self, new_phrase):
         self.phrase = new_phrase
 
+    # set_animal : Function that allow to set the self.animal a given animal in string format
     def set_animal(self, new_animal):
         self.animal = new_animal
+
 
 
 root = Tk()
@@ -224,5 +248,6 @@ app = Window(root)
 
 root.wm_title("PetTalks")
 root.geometry("1045x720")
-root.resizable(False, False)
+#root.resizable(False, False)
+
 root.mainloop()

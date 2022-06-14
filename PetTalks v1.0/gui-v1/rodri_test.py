@@ -1,82 +1,52 @@
-import tkinter as tk
-from tkinter import ttk
+import Tkinter as    tk
+from   PIL    import Image, ImageTk, ImageDraw
+from   os     import listdir,curdir
+
+class BlendedRectangle(object):
+
+    def __init__(self, xpos=0, ypos=0, width=10, height=10, image=None,
+            fill='black', intensity=1.0):
+
+            self.xpos = xpos
+            self.ypos = ypos
+            self.width = width
+            self.height = height
+            self.image = image
+            self.fill = fill
+            self.intensity = intensity
 
 
-# root window
+            self.coords = (self.xpos, self.ypos, self.xpos+self.width,
+                self.ypos+self.height)
+
+
+            self.bottom_image = self.image.crop(self.coords)
+
+
+            self.top_image = self.image.crop(self.coords)
+
+            self.draw = ImageDraw.Draw(self.top_image)
+
+            self.draw.polygon([
+                (0, 0), (self.width, 0), (self.width, self.height),
+                (0, self.height), (0, 0)], fill= self.fill)
+
+            self.blended_graphic_obj = Image.blend(self.bottom_image,
+                self.top_image, self.intensity)
+
+            self.image.paste(self.blended_graphic_obj, (self.xpos , self.ypos))
+
+            self.tk_image  = ImageTk.PhotoImage(self.image)
+
 root = tk.Tk()
-root.geometry('300x200')
-root.resizable(False, False)
-root.title('Slider Demo')
 
+image = Image.open("my_image.jpg")
+image_width, image_height = image.size
 
-root.columnconfigure(0, weight=1)
-root.columnconfigure(1, weight=3)
+canvas = tk.Canvas(root, width=image_width, height=image_height)
+canvas.pack()
 
-
-# slider current value
-current_value = tk.DoubleVar()
-
-
-def get_current_value():
-    return '{: .2f}'.format(current_value.get())
-
-
-def slider_changed(event):
-    value_label.configure(text=get_current_value())
-
-
-# label for the slider
-slider_label = ttk.Label(
-    root,
-    text='Balance:'
-)
-
-slider_label.grid(
-    column=0,
-    row=0,
-    sticky='w'
-)
-
-#  slider
-slider = ttk.Scale(
-    root,
-    from_=0,
-    to=1,
-    orient='horizontal',  # vertical
-    command=slider_changed,
-    variable=current_value
-)
-
-slider.grid(
-    column=1,
-    row=0,
-    sticky='we'
-)
-
-# current value label
-current_value_label = ttk.Label(
-    root,
-    text='Current Value:'
-)
-
-current_value_label.grid(
-    row=1,
-    columnspan=2,
-    sticky='n',
-    ipadx=10,
-    ipady=10
-)
-
-# value label
-value_label = ttk.Label(
-    root,
-    text=get_current_value()
-)
-value_label.grid(
-    row=2,
-    columnspan=2,
-    sticky='n'
-)
-
+image_obj = BlendedRectangle(10, 10, 50, 50, image, 'red', intensity=0.3)
+canvas.create_image(0, 0, image=image_obj.tk_image, anchor='nw')
 
 root.mainloop()

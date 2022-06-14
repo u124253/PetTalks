@@ -1,25 +1,26 @@
+#Import the required library
 from tkinter import *
+from PIL import Image, ImageTk
+from tkinter import ttk
 
-ws = Tk()
-ws.title("PythonGuides")
-ws.geometry('400x300')
-ws['bg'] = '#ffbf00'
+# Create object
+root = Tk()
 
+# Define the geometry of the window
+root.geometry("500x450")
 
-def printValue():
-    pname = player_name.get()
-    Label(ws, text=f'{pname}, Registered!', pady=20, bg='#ffbf00').pack()
+# Add the image file
+bg = ImageTk.PhotoImage(file="C:\\Python37\\scripts\\projects\\natural_img1.png")
 
+# Create a canvas
+canvas = Canvas(root,width= 400, height= 300)
+canvas.pack(fill= "both", expand=True)
 
-player_name = Entry(ws)
-player_name.pack(pady=30)
+# Display image
+canvas.create_image(0, 0, image=bg, anchor="nw")
 
-Button(
-    ws,
-    text="Register Player",
-    padx=10,
-    pady=5,
-    command=printValue
-    ).pack()
+# Add a text in canvas
+canvas.create_text(250,250,text="Good Morning!",font=("Times New Roman", 24))
 
-ws.mainloop()
+# Execute tkinter
+root.mainloop()
