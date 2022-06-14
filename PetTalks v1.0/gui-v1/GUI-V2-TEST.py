@@ -22,6 +22,7 @@ class Window(Frame):
     balance = 0.5
     save_to = "None"
 
+
     def __init__(self, master=None):
 
         Frame.__init__(self, master)
@@ -31,6 +32,8 @@ class Window(Frame):
 
         # selected_animal = StringVar()
         ###########################################################################################################
+
+
         # --------------------------------------
         """
         
@@ -40,7 +43,6 @@ class Window(Frame):
         self.canvas1.pack(fill="both", expand=True)
         self.canvas1.create_image(0, 0, image=self.imagenFondo, anchor="nw")
         """
-        # --------------------------------------
 
         # slider current value
         current_value = DoubleVar()
@@ -243,11 +245,19 @@ class Window(Frame):
 
 
 
+
+
 root = Tk()
+bg = PhotoImage(file="gui_desing_7.png")
+
+
 app = Window(root)
 
 root.wm_title("PetTalks")
 root.geometry("1045x720")
 #root.resizable(False, False)
+
+
+
 
 root.mainloop()
