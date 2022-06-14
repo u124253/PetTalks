@@ -1,46 +1,36 @@
 import tkinter
 from tkinter import ttk
-import sys
-import os
+import sys, os
 from pathlib import Path
 
-global frase
 
 path = str(Path(os.path.abspath(__file__)).parent)
+
 sys.path.insert(0, path + "/software/transformations_interface/")
 sys.path.insert(0, path + "/software/models/")
 
-frase = 'null'
-personaje_g='null'
 import stftMorph_function_2 as morph
 import utilFunctions as UF
 
-def saludar():
-    messagebox.showinfo(message="¡Hola, mundo!", title="Saludo")
-
 def generaMatriz(capaMatrizGen):
     def which_button(button_pressed):
-        pages = {0:'Amanda', 1:'Diego', 2: 'Thomas', 3: 'Rodrigo'}
+        pages = {0:'Amanda', 1:'Diego', 2: 'Thomas', 3: 'Rodrigo_grabaciones'}
         selected_page = aplicacion.notebook1.select()
-        #print("lolllllllllllllllllllllllllllll",selected_page)
         num = aplicacion.notebook1.index(selected_page)
-#############################aqui cambiar el path para que se reproduzca el sonido que se desee y no solo el hi_fast.wav
-        if os.path.exists(path + "/software/sounds/" + "diegohi.wav"):
-            UF.wavplay(path + "/software/sounds/" + "diegohi.wav")
-        print("iuuuuuuuu",personaje_g)
 
-        frase = button_pressed
-        print("--------------------------------------------------")
-        print("button pressed ",button_pressed, frase)
-        print("personaje", personaje_g)
+        if os.path.exists(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav'):
+            UF.wavplay(path + "/software/transformations_interface/Temp/" + button_pressed[-1] + pages[num]+'.wav')
 
-    pad_1 = tkinter.Button(capaMatrizGen, text="greetings ", width=16, height=8,
-                           command=lambda m='hi': which_button(m))
-    pad_2 = tkinter.Button(capaMatrizGen, text="Merry Christmas", width=16, height=8,
+
+        # return button_pressed
+
+    pad_1 = tkinter.Button(capaMatrizGen, text="Frase 1 ", width=16, height=8,
+                           command=lambda m="button1 ": which_button(m))
+    pad_2 = tkinter.Button(capaMatrizGen, text="Frase 2", width=16, height=8,
                            command=lambda m="button2": which_button(m))
-    pad_3 = tkinter.Button(capaMatrizGen, text="Happy Birthday", width=16, height=8,
+    pad_3 = tkinter.Button(capaMatrizGen, text="Frase 3", width=16, height=8,
                            command=lambda m="button3": which_button(m))
-    pad_4 = tkinter.Button(capaMatrizGen, text="Good Night", width=16, height=8,
+    pad_4 = tkinter.Button(capaMatrizGen, text=":Frase 4", width=16, height=8,
                            command=lambda m="button4": which_button(m))
     pad_5 = tkinter.Button(capaMatrizGen, text="Frase 5", width=16, height=8,
                            command=lambda m="button5": which_button(m))
@@ -63,34 +53,11 @@ def generaMatriz(capaMatrizGen):
     pad_8.grid(row=2, column=1, padx=1, pady=1)
     pad_9.grid(row=2, column=2, padx=1, pady=1)
 
-def makeMorph(animal, balance,personaje):
-    ## BORRAMOS LOS AUDIOS DE LA CARPETA OUTPUT SOUND
-    audios = os.listdir(path + '/software/transformations_interface/Temp/')
-    for audio in audios:
-        os.remove(path + '/software/transformations_interface/Temp/' + audio)
-
-    audios = os.listdir(path + "/software/sounds/")
-
-    for audio in audios:
-        audio_name = audio.split('.')[0]
-        name = audio_name.split('_')[0]
-        
-        if name == animal:
-            print("*****parametros morph****")
-            print("-> animal",animal)
-            print("-> personas",personaje)
-            #print("-> boton", button)
-            inputFile1 = animal.lower()+'.wav'
-            inputFile2 = personaje + frase +'.wav'
-            print(inputFile1, inputFile2)
-
-            morph.main(path + "/software/sounds/" + inputFile1,path + "/software/sounds/" + inputFile2,balancef=balance)
-
-
 class Aplicacion:
     def __init__(self, root):
         root.title("PetTalk")
 
+        # la ventana no es responsive aun
         # x en funcion del wWeight
         wHeight = 720  #adecuado al tamaño de la foto tanto HxW
         wWeight = 1045
@@ -98,7 +65,7 @@ class Aplicacion:
         root.resizable(False,False) #para que el usuario no pueda redimensionar la ventana ya predifinida
 
         # fondo
-        self.imagenFondo = tkinter.PhotoImage(file="gui_desing_7.png")
+        self.imagenFondo = tkinter.PhotoImage(file="../../gui_desing_7.png")
         self.label0 = tkinter.Label(root, image=self.imagenFondo)
         #self.label0.place(relwidth=1,relheight=1)
         self.canvas1 = tkinter.Canvas(root, width=wWeight, height=wHeight)
@@ -107,27 +74,26 @@ class Aplicacion:
 
 
         # lista desplegable para seleccionar el audio input1
-        self.combo = ttk.Combobox(state="readonly", values=["vaca","obejas","lleoo","Gaviota","cerdiño","ballena","pig2", "cat", "pig1","jaguar"])
-        self.combo.place(x=wWeight*0.05, y=wHeight*0.4)
+        self.combo = ttk.Combobox(state="readonly", values=["pig2", "cat", "pig1","jaguar"])
+        self.combo.place(x=wWeight*0.1, y=wHeight*0.4)
         self.combo.set("jaguar") #valor por defecto
 
 
         # notebook para hacer la seleccion de distintos personages
         self.notebook1 = ttk.Notebook(root)
         ttk.Style().configure("TNotebook", background="white")
-        self.notebook1.place(x=wWeight * 0.5, y=wHeight * 0.255)
-
+        self.notebook1.place(x=wWeight * 0.5, y=wHeight * 0.3)
         #esto se tiene que hacer para cada personaje
         self.frame1 = ttk.Frame(self.notebook1) #se genera un frame
         self.notebook1.add(self.frame1, text="Amanda") #se le agrega su respectiva pestaña dentro del notebook
         self.label1 = ttk.Label(self.frame1, text="¡Yo soy Amanda!") #texto, es opcional
-        test1=generaMatriz(self.frame1) #esta es su respectiva matriz
+        generaMatriz(self.frame1) #esta es su respectiva matriz
 
 
         self.frame2 = ttk.Frame(self.notebook1)  # se genera un frame
         self.notebook1.add(self.frame2, text="Diego")  # se le agrega su respectiva pestaña dentro del notebook
         self.label2 = ttk.Label(self.frame1, text="¡Yo soy Diego!")  # texto, es opcional
-        test2=generaMatriz(self.frame2)  # esta es su respectiva matriz
+        generaMatriz(self.frame2)  # esta es su respectiva matriz
 
         self.frame3 = ttk.Frame(self.notebook1)  # se genera un frame
         self.notebook1.add(self.frame3, text="Thomas")  # se le agrega su respectiva pestaña dentro del notebook
@@ -139,52 +105,56 @@ class Aplicacion:
         self.label4 = ttk.Label(self.frame4, text="¡Yo soy Rodrigo!")  # texto, es opcional
         generaMatriz(self.frame4)  # esta es su respectiva matriz
 
+
         # slider para cambiar el grado
-        self.scl = ttk.Scale(root, from_=0, to=1, length=347, orient="horizontal", value = 0.5)
-        self.scl.place(x=wWeight*0.047, y=wHeight*0.81)
-
-        #######################################
-        self.animal = "perro"
-        self.personaje = "diego"
-        self.balance = "0.5"
-        #######################################
-        self.GoButton = tkinter.Button(root, text="Go!", command=self.returnDeTodo,height=2, width=19).place(x=wWeight*0.05, y=wHeight * 0.86)
-
-        self.SaveButton = tkinter.Button(root, text="Save", command=self.returnDeTodo, height=2, width=19).place(x=wWeight * 0.242, y=wHeight * 0.86)
-
-        #print("aqui quiero que se vea el boton"+frase)
-        #print("finalButon _ line 145",self.finalButon )
+        self.scl = ttk.Scale(root, from_=0, to=1, length=279, orient="horizontal", value = 0.5)
+        #self.scl.place(x=wWeight*0.078, y=wHeight*0.763)
+        self.scl.place(x=80, y=wHeight*0.81)
+        self.morph()
+        self.finalButon = tkinter.Button(root, text="Listo", command=self.returnDeTodo,height=3, width=15).place(x=wWeight * 0.15, y=wHeight * 0.86)
 
 
-#Boton play animal
-        self.play_animal = tkinter.Button(root, text="Listen Animal", command=self.returnDeTodo, height=2, width=19).place(x=wWeight*0.05, y=wHeight * 0.45)
-
-#Botones load voice
-        self.load_audio=tkinter.Button(root, text="Load", command=self.returnDeTodo, height=2, width=19).place(x=wWeight*0.725, y=wHeight * 0.86)
-#############################################################################################
     def returnDeTodo(self):
         self.returnLista()
-        #print("return boton_149",self.returnLista())
         self.returnNotebook()
         self.returnSlider()
-        #self.morph()
-        makeMorph(self.animal, self.balance,self.personaje)
+        self.morph()
+
+    def morph(self):
+        ## BORRAMOS LOS AUDIOS DE LA CARPETA OUTPUT SOUND
+        audios = os.listdir(path + '/software/transformations_interface/Temp/')
+        for audio in audios:
+            os.remove(path + '/software/transformations_interface/Temp/' + audio)
+
+
+        audios = os.listdir(path + "/software/sounds/")
+        animal = self.combo.get()
+
+        for audio in audios:
+            audio_name = audio.split('.')[0]
+            name = audio_name.split('_')[0]
+            print("11111111111")
+            print(name)
+
+            if name == animal:
+                inputFile1 = animal.lower()+'.wav'
+                inputFile2 = "hi_fast.wav"
+                balance = self.scl.get()
+                morph.main(inputFile1=path + "/software/sounds/" + inputFile1, inputFile2=path + "/software/sounds/"+ inputFile2,
+                           balancef=balance)
+
 
     def returnLista(self):
-        self.animal=self.combo.get()
+        print(self.combo.get())
         #return self.combo.get() #para recoger la respuesta a la seleccion seria
 
     def returnNotebook(self):
-        self.personaje = self.notebook1.tab(self.notebook1.select(), "text")
-        #print ("personaje:",self.notebook1.tab(self.notebook1.select(), "text"))
-        #personaje=self.notebook1.tab(self.notebook1.select())
-        global personaje_g
-        personaje_g = self.notebook1.tab(self.notebook1.select(), "text")
+        print (self.notebook1.tab(self.notebook1.select(), "text"))
 
     def returnSlider(self):
-        self.balance = self.scl.get()
-        #print("balance:",self.scl.get())
+        print(self.scl.get())
 
 root = tkinter.Tk()
 aplicacion = Aplicacion(root)
+
 root.mainloop()

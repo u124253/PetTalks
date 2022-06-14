@@ -248,7 +248,7 @@ class Window(Frame):
 
 
 root = Tk()
-bg = PhotoImage(file="gui_desing_7.png")
+bg = PhotoImage(file="../../gui_desing_7.png")
 
 
 app = Window(root)

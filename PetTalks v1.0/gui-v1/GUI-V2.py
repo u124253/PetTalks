@@ -14,6 +14,20 @@ sys.path.insert(0, path + "/software/models/")
 import stftMorph_function_2 as morph
 import utilFunctions as UF
 
+global character
+global phrase
+global animal
+global balance
+global save_to
+"""
+character = "diego"
+phrase = "hi"
+animal = "jaguar"
+balance = 0.5
+save_to = "None"
+"""
+
+
 root = Tk()
 bg = PhotoImage(file="gui_desing_7.png")
 
@@ -26,24 +40,16 @@ canvas1.pack(fill="both", expand=True)
 # Display image
 canvas1.create_image(0, 0, image=bg, anchor="nw")
 
-# ------------------------------
-
-character = "diego"
-phrase = "hi"
-animal = "jaguar"
-balance = 0.5
-save_to = "None"
-
-
-# -------------------------
 
 
 def get_current_value():
+    global balance
     balance = current_value.get() / 100
     return
 
 
 def slider_changed(event):
+    global balance
     balance = current_value.get() / 100
     print(balance)
 
@@ -57,23 +63,6 @@ slider = Scale(root, from_=0, to=100, orient='horizontal', command=slider_change
 
 slider.place(x=500, y=500)
 
-
-def set_character(new_character):
-    character = new_character
-    print(character)
-
-
-# set_phrase: Function that allow to set the current value of a new_phrase to the attribute phrase of the class
-def set_phrase(new_phrase):
-    phrase = new_phrase
-
-    # set_animal : Function that allow to set the self.animal a given animal in string format
-
-
-def set_animal(new_animal):
-    animal = new_animal
-
-#-----------------------------------------------------------------------------------------------------------------------
 
 # clickExitButton: Exit the GUI
 def clickExitButton():
@@ -97,16 +86,24 @@ def stop_sound():
         UF.wavplay(path + "/software/sounds/" + "stop.wav")
 
 # set_character: Function that allow to set the current value of a new_character
-def set_character( new_character):
+def set_character(new_character):
+    global character
     character = new_character
+    print(character)
 
 # set_phrase: Function that allow to set the current value of a new_phrase to the attribute phrase of the class
 def set_phrase(new_phrase):
+    global phrase
     phrase = new_phrase
+    print(phrase)
 
 # set_animal : Function that allow to set the self.animal a given animal in string format
 def set_animal(new_animal):
+    global animal
     animal = new_animal
+    print(new_animal)
+    
+
 
 def make_Morph():
     # Delete old results
@@ -137,7 +134,7 @@ def save_to():
     shutil.copytree(source_dir, save_to)
 
 """
-Botones
+Characters Buttons
 """
 character_1 = Button(root, text="DIEGO",
                      height=5, width=10, command=lambda: set_character("diego"))
@@ -147,7 +144,9 @@ character_3 = Button(root, text="AMANDA",
                      height=5, width=10, command=lambda: set_character("amanda"))
 character_4 = Button(root, text="TOMAS",
                      height=5, width=10, command=lambda: set_character("tomas"))
-
+"""
+Phrase Buttons
+"""
 phrase_1 = Button(root, text="phrase_1",
                   height=5, width=10, command=lambda: set_phrase("hi"))
 phrase_2 = Button(root, text="phrase_2",
@@ -164,8 +163,9 @@ phrase_7 = Button(root, text="phrase_7",
                   height=5, width=10, command=lambda: set_phrase("hi7"))
 phrase_8 = Button(root, text="phrase_8",
                   height=5, width=10, command=lambda: set_phrase("hi8"))
-#######################################################################################################################
-
+"""
+Animals Buttons
+"""
 animal_1 = Button(root, text="JAGUAR",
                   height=5, width=10, command=lambda: set_animal("jaguar"))
 animal_2 = Button(root, text="BALLENA",
@@ -182,7 +182,9 @@ animal_7 = Button(root, text="animal 7",
                   height=5, width=10, command=lambda: set_animal("jaguar"))
 animal_8 = Button(root, text="animal 8",
                   height=5, width=10, command=lambda: set_animal("jaguar"))
-
+"""
+Other Buttons
+"""
 playVoice = Button(root, text="PLAY VOICE", height=2, width=53, command=lambda: play_sound())
 playAnimal = Button(root, text="PLAY ANIMAL", height=2, width=53, command=lambda: play_animal_sound())
 stopAnimal = Button(root, text="STOP ANIMAL", height=2, width=53, command=lambda: stop_sound())
