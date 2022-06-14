@@ -19,17 +19,15 @@ global phrase
 global animal
 global balance
 global save_to
-"""
+
+root = Tk()
 character = "diego"
 phrase = "hi"
 animal = "jaguar"
 balance = 0.5
 save_to = "None"
-"""
 
-
-root = Tk()
-bg = PhotoImage(file="gui_desing_7.png")
+bg = PhotoImage(file="gui.png")
 
 # Create Canvas
 canvas1 = Canvas(root, width=720,
@@ -40,12 +38,12 @@ canvas1.pack(fill="both", expand=True)
 # Display image
 canvas1.create_image(0, 0, image=bg, anchor="nw")
 
-
-
+"""
 def get_current_value():
     global balance
     balance = current_value.get() / 100
     return
+"""
 
 
 def slider_changed(event):
@@ -68,11 +66,13 @@ slider.place(x=500, y=500)
 def clickExitButton():
     exit()
 
+
 # play_sound: Function that play a sound with the current information in character and phrase
 def play_sound():
     print(path + "/software/sounds/" + character + phrase + ".wav")
     if os.path.exists(path + "/software/sounds/" + character + phrase + ".wav"):
         UF.wavplay(path + "/software/sounds/" + character + phrase + ".wav")
+
 
 # play_animal: Function that play a sound with the current information in animal
 def play_animal_sound():
@@ -80,10 +80,12 @@ def play_animal_sound():
     if os.path.exists(path + "/software/sounds/" + animal + ".wav"):
         UF.wavplay(path + "/software/sounds/" + animal + ".wav")
 
+
 # stop_sound: Function that stop audio by playing a .wav file with silence
 def stop_sound():
     if os.path.exists(path + "/software/sounds/" + "stop.wav"):
         UF.wavplay(path + "/software/sounds/" + "stop.wav")
+
 
 # set_character: Function that allow to set the current value of a new_character
 def set_character(new_character):
@@ -91,18 +93,19 @@ def set_character(new_character):
     character = new_character
     print(character)
 
+
 # set_phrase: Function that allow to set the current value of a new_phrase to the attribute phrase of the class
 def set_phrase(new_phrase):
     global phrase
     phrase = new_phrase
     print(phrase)
 
+
 # set_animal : Function that allow to set the self.animal a given animal in string format
 def set_animal(new_animal):
     global animal
     animal = new_animal
     print(new_animal)
-    
 
 
 def make_Morph():
@@ -123,19 +126,33 @@ def make_Morph():
             morph.main(path + "/software/sounds/" + inputFile1, path + "/software/sounds/" + inputFile2,
                        balancef=balance)
 
+
 def save_to():
-
     import shutil
+    import os
 
-    save_to = askdirectory(title='Select your folder')  # Shows dialog box and return the path
-    source_dir = path + '\\software\\transformations_interface\\temp\\moprh_result.wav'
-    print(source_dir)
-    print(save_to)
-    shutil.copytree(source_dir, save_to)
+    source = path + "\\software\\transformations_interface\\temp\\morph_result.wav"
+    print(source)
 
+    desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Downloads')
+    print(desktop)
+    destiny = askdirectory(title='Select your folder')  # Shows dialog box and return the path
+
+    shutil.copy2(source, destiny)  # complete target filename given
+
+
+"""
+img_boton = PhotoImage(file="lion_button.png")
+boton = Button(image=img_boton,
+                  height=80, width=74)
+boton.place(x=50, y=200)
+#80x74
+
+"""
 """
 Characters Buttons
 """
+
 character_1 = Button(root, text="DIEGO",
                      height=5, width=10, command=lambda: set_character("diego"))
 character_2 = Button(root, text="RODRIGO",
@@ -166,42 +183,59 @@ phrase_8 = Button(root, text="phrase_8",
 """
 Animals Buttons
 """
-animal_1 = Button(root, text="JAGUAR",
-                  height=5, width=10, command=lambda: set_animal("jaguar"))
-animal_2 = Button(root, text="BALLENA",
-                  height=5, width=10, command=lambda: set_animal("ballena"))
-animal_3 = Button(root, text="animal 3",
-                  height=5, width=10, command=lambda: set_animal("jaguar"))
-animal_4 = Button(root, text="animal 4",
-                  height=5, width=10, command=lambda: set_animal("jaguar"))
-animal_5 = Button(root, text="animal 5",
-                  height=5, width=10, command=lambda: set_animal("jaguar"))
+
+img_animal_1 = PhotoImage(file="lion_button.png")
+animal_1 = Button(root, text="lion",
+                  height=80, width=80,image=img_animal_1, command=lambda: set_animal("lion"))
+
+img_animal_2 = PhotoImage(file="whale_button.png")
+animal_2 = Button(root, text="whale",
+                  height=80, width=80,image=img_animal_2, command=lambda: set_animal("whale"))
+
+img_animal_3 = PhotoImage(file="goat_button.png")
+animal_3 = Button(root, text="goat",
+                  height=80, width=80,image=img_animal_3, command=lambda: set_animal("goat"))
+
+img_animal_4 = PhotoImage(file="cheetah_button.png")
+animal_4 = Button(root, text="cheetah",
+                  height=80, width=80,image=img_animal_4, command=lambda: set_animal("cheetah"))
+
+img_animal_5 = PhotoImage(file="pig_button.png")
+animal_5 = Button(root, text="pig",
+                  height=80, width=80,image=img_animal_5, command=lambda: set_animal("pig"))
+
+img_animal_6 = PhotoImage(file="cow_button.png")
 animal_6 = Button(root, text="animal 6",
-                  height=5, width=10, command=lambda: set_animal("jaguar"))
-animal_7 = Button(root, text="animal 7",
-                  height=5, width=10, command=lambda: set_animal("jaguar"))
-animal_8 = Button(root, text="animal 8",
-                  height=5, width=10, command=lambda: set_animal("jaguar"))
+                  height=80, width=80,image=img_animal_6, command=lambda: set_animal("cow"))
+
+img_animal_7 = PhotoImage(file="seagul_button.png")
+animal_7 = Button(root, text="seagul",
+                  height=80, width=80,image=img_animal_7, command=lambda: set_animal("seagul"))
+
+img_animal_8 = PhotoImage(file="cat_button.png")
+animal_8 = Button(root, text="cat",
+                  height=80, width=80,image=img_animal_8, command=lambda: set_animal("cat"))
 """
 Other Buttons
 """
-playVoice = Button(root, text="PLAY VOICE", height=2, width=53, command=lambda: play_sound())
-playAnimal = Button(root, text="PLAY ANIMAL", height=2, width=53, command=lambda: play_animal_sound())
-stopAnimal = Button(root, text="STOP ANIMAL", height=2, width=53, command=lambda: stop_sound())
+playVoice = Button(root, text="LISTEN VOICE", height=2, width=24, command=lambda: play_sound())
+stopVoice = Button(root, text="STOP ", height=2, width=24, command=lambda: stop_sound())
 
-exitButton = Button(root, text="Exit", command=clickExitButton)
-goButton = Button(root, text="Go!", command=lambda: make_Morph(), height=2, width=19)
+playAnimal = Button(root, text="LISTEN ANIMAL", height=2, width=24, command=lambda: play_animal_sound())
+stopAnimal = Button(root, text="STOP ", height=2, width=24, command=lambda: stop_sound())
 
-saveButton = Button(root, text="Save To!", command=lambda: save_to(), height=2, width=19)
-saveButton.place(x=0, y=0)
+exitButton = Button(root, text="Exit",height=2,command=clickExitButton)
+goButton = Button(root, text="GO!", command=lambda: make_Morph(), height=2, width=24)
 
+saveButton = Button(root, text="SAVE TO:", command=lambda: save_to(), height=2, width=24)
 
-
-
-character_1.place(x=600, y=200)
-character_2.place(x=700, y=200)
-character_3.place(x=800, y=200)
-character_4.place(x=900, y=200)
+"""
+Buttons Places
+"""
+character_1.place(x=600, y=100)
+character_2.place(x=700, y=100)
+character_3.place(x=800, y=100)
+character_4.place(x=900, y=100)
 
 phrase_1.place(x=600, y=300)
 phrase_2.place(x=700, y=300)
@@ -213,7 +247,7 @@ phrase_6.place(x=700, y=400)
 phrase_7.place(x=800, y=400)
 phrase_8.place(x=900, y=400)
 
-slider.place(x=440, y=503)
+slider.place(x=440, y=499)
 
 animal_1.place(x=50, y=300)
 animal_2.place(x=150, y=300)
@@ -226,16 +260,19 @@ animal_7.place(x=250, y=400)
 animal_8.place(x=350, y=400)
 
 playVoice.place(x=600, y=500)
+stopVoice.place(x=800, y=500)
+
 playAnimal.place(x=50, y=500)
-stopAnimal.place(x=50, y=600)
+stopAnimal.place(x=251, y=500)
 
 goButton.place(x=600, y=600)
+saveButton.place(x=800, y=600)
+
 exitButton.place(x=500, y=600)
 
-
-root.wm_title("PetTalks")
-root.geometry("1045x720")
+root.wm_title("PetTALKS")
+root.geometry("1015x720")
 root.resizable(False, False)
-
+root.iconbitmap("PetTalks_icon.ico")
 
 root.mainloop()
