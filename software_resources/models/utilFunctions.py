@@ -8,7 +8,7 @@ if sys.platform == "win32":
 		import winsound
 		winsound_imported = True
 	except:
-		print ("You won't be able to play sounds, winsound could not be imported")
+		print ("You won't be able to play sounds_resources, winsound could not be imported")
 
 def isPower2(num):
 	"""

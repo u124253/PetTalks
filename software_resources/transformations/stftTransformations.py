@@ -8,11 +8,11 @@ import dftModel as DFT
 
 def stftMorph(x1, x2, fs, w1, N1, w2, N2, H1, smoothf, balancef):
 	"""
-	Morph of two sounds using the STFT
-	x1, x2: input sounds, fs: sampling rate
+	Morph of two sounds_resources using the STFT
+	x1, x2: input sounds_resources, fs: sampling rate
 	w1, w2: analysis windows, N1, N2: FFT sizes, H1: hop size
 	smoothf: smooth factor of sound 2, bigger than 0 to max of 1, where 1 is no smothing,
-	balancef: balance between the 2 sounds, from 0 to 1, where 0 is sound 1 and 1 is sound 2
+	balancef: balance between the 2 sounds_resources, from 0 to 1, where 0 is sound 1 and 1 is sound 2
 	returns y: output sound
 	"""
 	
