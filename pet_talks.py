@@ -55,7 +55,7 @@ def play_interface_sound(audio_name):
 
 # play_sound: Function that play a sound with the current information in character and phrase
 def play_sound():
-    if os.path.exists(path + "/sounds_resources/" + character +'_'+ phrase + ".wav"):
+    if os.path.exists(path + "/sounds_resources/" + character + '_' + phrase + ".wav"):
         UF.wavplay(path + "/sounds_resources/" + character +'_' + phrase + ".wav")
 
 
@@ -103,7 +103,7 @@ def make_Morph():
 
         if name == animal:
             inputFile1 = animal + '.wav'
-            inputFile2 = character + phrase + '.wav'
+            inputFile2 = character + '_'+ phrase + '.wav'
             morph.main(path + "/sounds_resources/" + inputFile1, path + "/sounds_resources/" + inputFile2,
                        balancef=balance)
 
@@ -138,22 +138,23 @@ character_4 = Button(root, text="AMANDA",
 """
 Phrase Buttons
 """
-phrase_1 = Button(root, text="Hi, how are you",
+phrase_1 = Button(root, text="Hi",
                   height=5, width=10, command=lambda: set_phrase("hi"))
-phrase_2 = Button(root, text="name",
+phrase_2 = Button(root, text="Name",
                   height=5, width=10, command=lambda: set_phrase("name"))
-phrase_3 = Button(root, text="phrase_3",
-                  height=5, width=10, command=lambda: set_phrase("hi3"))
-phrase_4 = Button(root, text="phrase_4",
-                  height=5, width=10, command=lambda: set_phrase("hi4"))
-phrase_5 = Button(root, text="phrase_5",
-                  height=5, width=10, command=lambda: set_phrase("hi5"))
-phrase_6 = Button(root, text="phrase_6",
-                  height=5, width=10, command=lambda: set_phrase("hi6"))
-phrase_7 = Button(root, text="phrase_7",
-                  height=5, width=10, command=lambda: set_phrase("hi7"))
-phrase_8 = Button(root, text="phrase_8",
-                  height=5, width=10, command=lambda: set_phrase("hi8"))
+phrase_3 = Button(root, text="Age",
+                  height=5, width=10, command=lambda: set_phrase("age"))
+phrase_4 = Button(root, text="Birthday",
+                  height=5, width=10, command=lambda: set_phrase("birthday"))
+phrase_5 = Button(root, text="Other",
+                  height=5, width=10, command=lambda: set_phrase("other"))
+phrase_6 = Button(root, text="Christmas",
+                  height=5, width=10, command=lambda: set_phrase("christmas"))
+phrase_7 = Button(root, text="Friend",
+                  height=5, width=10, command=lambda: set_phrase("friend"))
+phrase_8 = Button(root, text="Bye",
+                  height=5, width=10, command=lambda: set_phrase("bye"))
+
 """
 Animals Buttons
 """
