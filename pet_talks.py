@@ -55,8 +55,8 @@ def play_interface_sound(audio_name):
 
 # play_sound: Function that play a sound with the current information in character and phrase
 def play_sound():
-    if os.path.exists(path + "/sounds_resources/" + character + phrase + ".wav"):
-        UF.wavplay(path + "/sounds_resources/" + character + phrase + ".wav")
+    if os.path.exists(path + "/sounds_resources/" + character +'_'+ phrase + ".wav"):
+        UF.wavplay(path + "/sounds_resources/" + character +'_' + phrase + ".wav")
 
 
 # play_animal: Function that play a sound with the current information in animal
