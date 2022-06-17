@@ -91,7 +91,7 @@ def set_animal(new_animal):
 
 def make_Morph():
     # Delete old results
-    audios = os.listdir(path + '/software_resources/transformations_interface/temp/')
+    audios = os.listdir(path + '/software_resources/transformations_interface/Temp/')
     for audio in audios:
         os.remove(path + '/software_resources/transformations_interface/Temp/' + audio)
 
