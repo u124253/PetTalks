@@ -27,9 +27,7 @@ save_to = "None"
 bg = PhotoImage(file="visual_resources/gui.png")
 
 # Create Canvas
-canvas1 = Canvas(root, width=720,
-                 height=1045)
-
+canvas1 = Canvas(root, width=720, height=1045)
 canvas1.pack(fill="both", expand=True)
 
 # Display image
@@ -39,16 +37,12 @@ def slider_changed(event):
     global balance
     balance = current_value.get() / 100
 
-
 # slider current value
 current_value = DoubleVar()
 
 #  slider
-slider = Scale(root, from_=0, to=100, orient='horizontal', command=slider_changed, variable=current_value,
-               length=145)
-
+slider = Scale(root, from_=0, to=100, orient='horizontal', command=slider_changed, variable=current_value, length=145)
 slider.place(x=500, y=500)
-
 
 # clickExitButton: Exit the GUI
 def clickExitButton():
@@ -118,13 +112,8 @@ def save_to():
     import shutil
     import os
     result_filename = "petTalks_" + animal + '_'+character + phrase + ".wav"
-    source = path + "\\software_resources\\transformations_interface\\temp\\"+ result_filename
-    print(source)
-
-    desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Downloads')
-    print(desktop)
-    destiny = askdirectory(title='Select your folder')  # Shows dialog box and return the path
-
+    source = path + "\\software_resources\\transformations_interface\\temp\\" + result_filename
+    destiny = askdirectory(title ='Select your folder')  # Shows dialog box and return the path
     shutil.copy2(source, destiny)  # complete target filename given
 
 """
