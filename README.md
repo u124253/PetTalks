@@ -1,22 +1,25 @@
 PetTalks
 ========= 
 
-PetTalks es una aplicacion que permite a los animales hablar.
+Para conseguir la ultima version de nuestro ejecutable tambien peudes visitar nuestro repositorio de github: https://github.com/u124253/PetTalks
 
-Hacemos uso del repositorio de  Github smstools https://github.com/MTG/sms-tools
-especificamente, usaremos las funciones que permiten realizar morphs 
-(transformaciones) de audios.
+PetTalks es una aplicación que permite hacer transformaciones morph usando grabaciones de voces humanas predefinidas y sonidos de animales escogidos.
+Para hacerlo nos hemos basado en el repositorio de Github sms-tools https://github.com/MTG/sms-tools
 
-El proyecto contara con grabaciones predefinidas y voces de animales escogidas 
-de tal manera que el resultado que produzca PetTalks sea correcto. 
-
-Para usarlo
+Instrucciones de uso
 ----------
-Instalar Python version 3.7.x y los siguientes modulos: ipython, numpy, matplotlib, scipy, y cython
+Descargar la carpeta del repositorio llamada PetTalks.
+Ir a la carpeta PetTalks y abrir el documento llamado pet_talks.py
+Ejecutar el archivo (desde el terminal o en la API)
+
+
+Requisitos del sistema
+----------
+Instalar Python version 3.7.x y los siguientes modulos: ipython, numpy, matplotlib y scipy
   
   Para instalarlos, usar terminal o API
   
-    3.1. En Ubuntu: <code>$ sudo apt-get install python-dev ipython python-numpy python-matplotlib python-scipy cython</code>
+    3.1. En Ubuntu: <code>$ sudo apt-get install python-dev ipython python-numpy python-matplotlib python-scipy </code>
   
     3.2. En OSX: <code>$ pip install ipython numpy matplotlib scipy cython</code>
          Compilar las funciones de C siguientes: software/models/utilFunctions_C 
