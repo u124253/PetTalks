@@ -90,6 +90,7 @@ def set_animal(new_animal):
 
 
 def make_Morph():
+
     # Delete old results
     audios = os.listdir(path + '/software_resources/transformations_interface/Temp/')
     for audio in audios:
@@ -125,8 +126,8 @@ character_1 = Button(root, text="DIEGO",
                      height=80, width=80,image=img_char_1, command=lambda: set_character("diego"))
 
 img_char_2 = PhotoImage(file="visual_resources/character_2.png")
-character_2 = Button(root, text="RODRIGO",
-                     height=80, width=80,image=img_char_2, command=lambda: set_character("rodrigo"))
+character_2 = Button(root, text="COCO",
+                     height=80, width=80,image=img_char_2, command=lambda: set_character("coco"))
 
 img_char_3 = PhotoImage(file="visual_resources/character_3.png")
 character_3 = Button(root, text="TOMAS",
@@ -138,22 +139,38 @@ character_4 = Button(root, text="AMANDA",
 """
 Phrase Buttons
 """
+img_phrase_1 = PhotoImage(file="visual_resources/hi_button.png")
 phrase_1 = Button(root, text="Hi",
-                  height=5, width=10, command=lambda: set_phrase("hi"))
+                  height=80, width=80,image=img_phrase_1,command=lambda: set_phrase("hi"))
+
+
+img_phrase_2 = PhotoImage(file="visual_resources/name_button.png")
 phrase_2 = Button(root, text="Name",
-                  height=5, width=10, command=lambda: set_phrase("name"))
+                  height=80, width=80,image=img_phrase_2, command=lambda: set_phrase("name"))
+
+img_phrase_3 = PhotoImage(file="visual_resources/old_button.png")
 phrase_3 = Button(root, text="Age",
-                  height=5, width=10, command=lambda: set_phrase("age"))
+                  height=80, width=80,image=img_phrase_3, command=lambda: set_phrase("age"))
+
+img_phrase_4 = PhotoImage(file="visual_resources/hbb_button.png")
 phrase_4 = Button(root, text="Birthday",
-                  height=5, width=10, command=lambda: set_phrase("birthday"))
+                  height=80, width=80,image=img_phrase_4,command=lambda: set_phrase("birthday"))
+
+img_phrase_5 = PhotoImage(file="visual_resources/other_button.png")
 phrase_5 = Button(root, text="Other",
-                  height=5, width=10, command=lambda: set_phrase("other"))
+                  height=80, width=80,image=img_phrase_5, command=lambda: set_phrase("other"))
+
+img_phrase_6 = PhotoImage(file="visual_resources/xmass_button.png")
 phrase_6 = Button(root, text="Christmas",
-                  height=5, width=10, command=lambda: set_phrase("christmas"))
+                  height=80, width=80,image=img_phrase_6, command=lambda: set_phrase("christmas"))
+
+img_phrase_7 = PhotoImage(file="visual_resources/friend_button.png")
 phrase_7 = Button(root, text="Friend",
-                  height=5, width=10, command=lambda: set_phrase("friend"))
+                  height=80, width=80,image=img_phrase_7, command=lambda: set_phrase("friend"))
+
+img_phrase_8 = PhotoImage(file="visual_resources/nice_button.png")
 phrase_8 = Button(root, text="Bye",
-                  height=5, width=10, command=lambda: set_phrase("bye"))
+                  height=80, width=80,image=img_phrase_8, command=lambda: set_phrase("bye"))
 
 """
 Animals Buttons
