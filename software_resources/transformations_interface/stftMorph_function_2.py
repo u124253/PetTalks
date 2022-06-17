@@ -42,6 +42,7 @@ def main(inputFile1, inputFile2, window1='hamming',  window2='hamming',
 	name_Inputfile2 = inputFile2.split('/')[-1].split('.')[0]
 	outputFile = path + '/Temp/' + os.path.basename("petTalks_" + name_Inputfile1 + '_'+name_Inputfile2 + ".wav")
 	UF.wavwrite(y, fs, outputFile)
+
 	#Play file
 	UF.wavplay(path + '/Temp/' + os.path.basename("petTalks_" + name_Inputfile1 + '_'+name_Inputfile2 + ".wav"))
 	return y
