@@ -138,10 +138,10 @@ character_4 = Button(root, text="AMANDA",
 """
 Phrase Buttons
 """
-phrase_1 = Button(root, text="phrase_1",
+phrase_1 = Button(root, text="Hi, how are you",
                   height=5, width=10, command=lambda: set_phrase("hi"))
-phrase_2 = Button(root, text="phrase_2",
-                  height=5, width=10, command=lambda: set_phrase("hi"))
+phrase_2 = Button(root, text="name",
+                  height=5, width=10, command=lambda: set_phrase("name"))
 phrase_3 = Button(root, text="phrase_3",
                   height=5, width=10, command=lambda: set_phrase("hi3"))
 phrase_4 = Button(root, text="phrase_4",
