@@ -8,8 +8,9 @@ from tkinter import *
 from tkinter.filedialog import askdirectory
 
 path = str(Path(os.path.abspath(__file__)).parent)
-sys.path.insert(0, path + "/software/transformations_interface/")
-sys.path.insert(0, path + "/software/models/")
+sys.path.insert(0, path + "/transformations_interface/")
+sys.path.insert(0, path + "/models/")
+
 
 import stftMorph_function_2 as morph
 import utilFunctions as UF
@@ -27,7 +28,7 @@ animal = "jaguar"
 balance = 0.5
 save_to = "None"
 
-bg = PhotoImage(file="gui.png")
+bg = PhotoImage(file="visual/gui.png")
 
 # Create Canvas
 canvas1 = Canvas(root, width=720,
@@ -70,27 +71,27 @@ def clickExitButton():
 # play_sound: Function that play a sound with the current information in character and phrase
 def play_interface_sound(audio_name):
 
-    if os.path.exists(path + "/software/sounds/"+audio_name+".wav"):
-        UF.wavplay(path + "/software/sounds/"+audio_name+".wav")
+    if os.path.exists(path + "/sounds/"+audio_name+".wav"):
+        UF.wavplay(path + "/ounds/"+audio_name+".wav")
 
 # play_sound: Function that play a sound with the current information in character and phrase
 def play_sound():
-    print(path + "/software/sounds/" + character + phrase + ".wav")
-    if os.path.exists(path + "/software/sounds/" + character + phrase + ".wav"):
-        UF.wavplay(path + "/software/sounds/" + character + phrase + ".wav")
+    print(path + "/sounds/" + character + phrase + ".wav")
+    if os.path.exists(path + "/sounds/" + character + phrase + ".wav"):
+        UF.wavplay(path + "/sounds/" + character + phrase + ".wav")
 
 
 # play_animal: Function that play a sound with the current information in animal
 def play_animal_sound():
-    print(path + "/software/sounds/" + animal + ".wav")
-    if os.path.exists(path + "/software/sounds/" + animal + ".wav"):
-        UF.wavplay(path + "/software/sounds/" + animal + ".wav")
+    print(path + "/sounds/" + animal + ".wav")
+    if os.path.exists(path + "/sounds/" + animal + ".wav"):
+        UF.wavplay(path + "/sounds/" + animal + ".wav")
 
 
 # stop_sound: Function that stop audio by playing a .wav file with silence
 def stop_sound():
-    if os.path.exists(path + "/software/sounds/" + "stop.wav"):
-        UF.wavplay(path + "/software/sounds/" + "stop.wav")
+    if os.path.exists(path + "/sounds/" + "stop.wav"):
+        UF.wavplay(path + "/sounds/" + "stop.wav")
 
 
 # set_character: Function that allow to set the current value of a new_character
@@ -115,11 +116,11 @@ def set_animal(new_animal):
 
 def make_Morph():
     # Delete old results
-    audios = os.listdir(path + '/software/transformations_interface/temp/')
+    audios = os.listdir(path + '/transformations_interface/temp/')
     for audio in audios:
-        os.remove(path + '/software/transformations_interface/Temp/' + audio)
+        os.remove(path + '/transformations_interface/Temp/' + audio)
 
-    audios = os.listdir(path + "/software/sounds/")
+    audios = os.listdir(path + "/sounds/")
 
     for audio in audios:
         audio_name = audio.split('.')[0]
@@ -128,7 +129,7 @@ def make_Morph():
         if name == animal:
             inputFile1 = animal + '.wav'
             inputFile2 = character + phrase + '.wav'
-            morph.main(path + "/software/sounds/" + inputFile1, path + "/software/sounds/" + inputFile2,
+            morph.main(path + "/sounds/" + inputFile1, path + "/sounds/" + inputFile2,
                        balancef=balance)
 
 
@@ -136,7 +137,7 @@ def save_to():
     import shutil
     import os
 
-    source = path + "\\software\\transformations_interface\\temp\\morph_result.wav"
+    source = path + "\\transformations_interface\\temp\\morph_result.wav"
     print(source)
 
     desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Downloads')
@@ -158,19 +159,19 @@ boton.place(x=50, y=200)
 Characters Buttons
 """
 
-img_char_1 = PhotoImage(file="character_1.png")
+img_char_1 = PhotoImage(file="visual/character_1.png")
 character_1 = Button(root, text="DIEGO",
                      height=80, width=80,image=img_char_1, command=lambda: set_character("diego"))
 
-img_char_2 = PhotoImage(file="character_2.png")
+img_char_2 = PhotoImage(file="visual/character_2.png")
 character_2 = Button(root, text="RODRIGO",
                      height=80, width=80,image=img_char_2, command=lambda: set_character("rodrigo"))
 
-img_char_3 = PhotoImage(file="character_3.png")
+img_char_3 = PhotoImage(file="visual/character_3.png")
 character_3 = Button(root, text="TOMAS",
                      height=80, width=80,image=img_char_3, command=lambda: set_character("tomas"))
 
-img_char_4 = PhotoImage(file="character_4.png")
+img_char_4 = PhotoImage(file="visual/character_4.png")
 character_4 = Button(root, text="AMANDA",
                      height=80, width=80,image=img_char_4, command=lambda: set_character("amanda"))
 """
@@ -196,35 +197,35 @@ phrase_8 = Button(root, text="phrase_8",
 Animals Buttons
 """
 
-img_animal_1 = PhotoImage(file="lion_button.png")
+img_animal_1 = PhotoImage(file="visual/lion_button.png")
 animal_1 = Button(root, text="lion",
                   height=80, width=80,image=img_animal_1, command=lambda: set_animal("lion"))
 
-img_animal_2 = PhotoImage(file="whale_button.png")
+img_animal_2 = PhotoImage(file="visual/whale_button.png")
 animal_2 = Button(root, text="whale",
                   height=80, width=80,image=img_animal_2, command=lambda: set_animal("whale"))
 
-img_animal_3 = PhotoImage(file="goat_button.png")
+img_animal_3 = PhotoImage(file="visual/goat_button.png")
 animal_3 = Button(root, text="goat",
                   height=80, width=80,image=img_animal_3, command=lambda: set_animal("goat"))
 
-img_animal_4 = PhotoImage(file="cheetah_button.png")
+img_animal_4 = PhotoImage(file="visual/cheetah_button.png")
 animal_4 = Button(root, text="cheetah",
                   height=80, width=80,image=img_animal_4, command=lambda: set_animal("cheetah"))
 
-img_animal_5 = PhotoImage(file="pig_button.png")
+img_animal_5 = PhotoImage(file="visual/pig_button.png")
 animal_5 = Button(root, text="pig",
                   height=80, width=80,image=img_animal_5, command=lambda: set_animal("pig"))
 
-img_animal_6 = PhotoImage(file="cow_button.png")
+img_animal_6 = PhotoImage(file="visual/cow_button.png")
 animal_6 = Button(root, text="animal 6",
                   height=80, width=80,image=img_animal_6, command=lambda: set_animal("cow"))
 
-img_animal_7 = PhotoImage(file="seagul_button.png")
+img_animal_7 = PhotoImage(file="visual/seagul_button.png")
 animal_7 = Button(root, text="seagul",
                   height=80, width=80,image=img_animal_7, command=lambda: set_animal("seagul"))
 
-img_animal_8 = PhotoImage(file="cat_button.png")
+img_animal_8 = PhotoImage(file="visual/cat_button.png")
 animal_8 = Button(root, text="cat",
                   height=80, width=80,image=img_animal_8, command=lambda: set_animal("cat"))
 """
@@ -285,6 +286,6 @@ exitButton.place(x=500, y=600)
 root.wm_title("PetTALKS")
 root.geometry("1015x650")
 root.resizable(False, False)
-root.iconbitmap("PetTalks_icon.ico")
+root.iconbitmap("visual/PetTalks_icon.ico")
 
 root.mainloop()
