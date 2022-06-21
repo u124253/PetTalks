@@ -1,8 +1,10 @@
+
 import sys
 import os
 from pathlib import Path
 from tkinter import Tk,PhotoImage,Canvas,DoubleVar,Scale,Button
 from tkinter.filedialog import askdirectory
+from tkinter.filedialog import askopenfilename
 
 path = str(Path(os.path.abspath(__file__)).parent)
 sys.path.insert(0, path + "/software_resources/transformations_interface/")
@@ -18,11 +20,19 @@ global balance
 global save_to
 
 root = Tk()
+
 character = "diego"
 phrase = "hi"
 animal = "jaguar"
 balance = 0.5
 save_to = "None"
+
+phrase_loaded="No"
+animal_loaded="No"
+flag_animal=0
+flag_phrase=0
+
+morph_filename= "None"
 
 bg = PhotoImage(file="visual_resources/gui.png")
 
@@ -30,23 +40,43 @@ bg = PhotoImage(file="visual_resources/gui.png")
 canvas1 = Canvas(root, width=720, height=1045)
 canvas1.pack(fill="both", expand=True)
 
-# Display image
+# Display background image
 canvas1.create_image(0, 0, image=bg, anchor="nw")
 
 def slider_changed(event):
     global balance
-    balance = current_value.get() / 100
+    balance = slider_current_value.get() / 100
 
 # slider current value
-current_value = DoubleVar()
+slider_current_value = DoubleVar()
 
 #  slider
-slider = Scale(root, from_=0, to=100, orient='horizontal', command=slider_changed, variable=current_value, length=145)
+slider = Scale(root, from_=0, to=100, orient='horizontal', command=slider_changed, variable=slider_current_value, length=145)
 slider.place(x=500, y=500)
 
-# clickExitButton: Exit the GUI
-def clickExitButton():
-    exit()
+"""
+Load Button
+"""
+load_phrase = Button(root, text="LOAD VOICE", height=2, width=24, command=lambda: load_phrase())
+
+load_animal = Button(root, text="LOAD ANIMAL", height=2, width=24, command=lambda: load_animal())
+load_animal.place(x=600,y=650)
+
+load_phrase.place(x=800,y=650)
+
+# load_phrase: load a phrase to perform custom morph
+def load_phrase():
+    global phrase_loaded,flag_phrase,phrase
+    phrase_loaded= str(askopenfilename())
+    flag_phrase=1
+
+# load_phrase: load a phrase to perform custom morph
+def load_animal():
+    global animal_loaded,flag_animal,animal
+    animal_loaded = str(askopenfilename())
+    flag_animal=1
+
+
 
 # play_sound: Function that play a sound with the current information in character and phrase
 def play_interface_sound(audio_name):
@@ -78,41 +108,57 @@ def set_character(new_character):
 
 # set_phrase: Function that allow to set the current value of a new_phrase to the attribute phrase of the class
 def set_phrase(new_phrase):
-    global phrase
+    global phrase,flag_phrase
     phrase = new_phrase
     play_sound()
+    flag_phrase=0
 
 # set_animal : Function that allow to set the self.animal a given animal in string format
 def set_animal(new_animal):
-    global animal
+    global animal,flag_animal
     animal = new_animal
     play_animal_sound()
+    flag_animal=0
 
+def make_morph():
+    global flag_animal
+    global flag_phrase
+    global morph_filename
+    if flag_phrase == 0 or flag_phrase == 0:
+        # Delete old results
+        audios = os.listdir(path + '/software_resources/transformations_interface/Temp/')
+        for audio in audios:
+            os.remove(path + '/software_resources/transformations_interface/Temp/' + audio)
 
-def make_Morph():
+        audios = os.listdir(path + "/sounds_resources/")
 
-    # Delete old results
-    audios = os.listdir(path + '/software_resources/transformations_interface/Temp/')
-    for audio in audios:
-        os.remove(path + '/software_resources/transformations_interface/Temp/' + audio)
+        for audio in audios:
+            audio_name = audio.split('.')[0]
+            name = audio_name.split('_')[0]
+            if name == animal:
+                inputFile1 = animal + '.wav'
+                inputFile2 = character + '_'+ phrase + '.wav'
+                morph.main(path + "/sounds_resources/" + inputFile1, path + "/sounds_resources/" + inputFile2,
+                           balancef=balance)
+            # set the final filename to:
+            morph_filename=("petTalks_" + animal + '_' + character + '_'+ phrase + ".wav")
 
-    audios = os.listdir(path + "/sounds_resources/")
+    if flag_phrase==1 and flag_phrase==1:
 
-    for audio in audios:
-        audio_name = audio.split('.')[0]
-        name = audio_name.split('_')[0]
+        name_file_1=animal_loaded.split('/')[-1].split('.')[0]
+        name_file_2=phrase_loaded.split('/')[-1].split('.')[0]
 
-        if name == animal:
-            inputFile1 = animal + '.wav'
-            inputFile2 = character + '_'+ phrase + '.wav'
-            morph.main(path + "/sounds_resources/" + inputFile1, path + "/sounds_resources/" + inputFile2,
-                       balancef=balance)
+        #set the final filename to:
+        morph_filename="petTalks_" + name_file_1 + '_' + name_file_2 + ".wav"
+        morph.main(animal_loaded, phrase_loaded, balancef=balance)
 
+        flag_animal = 0
+        flag_phrase = 0
 
 def save_to():
     import shutil
     import os
-    result_filename = "petTalks_" + animal + '_'+character + phrase + ".wav"
+    result_filename = morph_filename
     source = path + "\\software_resources\\transformations_interface\\temp\\" + result_filename
     destiny = askdirectory(title ='Select your folder')  # Shows dialog box and return the path
     shutil.copy2(source, destiny)  # complete target filename given
@@ -213,8 +259,7 @@ Other Buttons
 stopVoice = Button(root, text="STOP ", height=2, width=24, command=lambda: stop_sound())
 stopAnimal = Button(root, text="STOP ", height=2, width=24, command=lambda: stop_sound())
 
-exitButton = Button(root, text="Exit",height=2,command=clickExitButton)
-goButton = Button(root, text="GO!", command=lambda: make_Morph(), height=2, width=24)
+goButton = Button(root, text="GO!", command=lambda: make_morph(), height=2, width=24)
 
 saveButton = Button(root, text="SAVE TO", command=lambda: save_to(), height=2, width=24)
 
@@ -249,15 +294,13 @@ animal_7.place(x=250, y=400)
 animal_8.place(x=350, y=400)
 
 stopVoice.place(x=800, y=500)
-stopAnimal.place(x=50, y=500)
+stopAnimal.place(x=250, y=500)
 
-goButton.place(x=600, y=600)
-saveButton.place(x=800, y=600)
-
-exitButton.place(x=500, y=600)
+goButton.place(x=600, y=580)
+saveButton.place(x=800, y=580)
 
 root.wm_title("PetTALKS")
-root.geometry("1015x650")
+root.geometry("1015x720")
 root.resizable(False, False)
 root.iconbitmap("visual_resources/PetTalks_icon.ico")
 
