@@ -121,6 +121,8 @@ def set_animal(new_animal):
     flag_animal=0
 
 def make_morph():
+    if not os.path.exists(path + '/software_resources/transformations_interface/Temp/'):
+        os.mkdir(path + '/software_resources/transformations_interface/Temp/')
     global flag_animal
     global flag_phrase
     global morph_filename
